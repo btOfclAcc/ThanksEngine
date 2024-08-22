@@ -68,54 +68,24 @@ void ShapeState::Initialize()
 	CreateShape();
 
 	mCamera.SetPosition({ 0.0f, 1.0f, -3.0f });
-	mCamera.SetDirection({ 0.0f, 0.0f, 0.0f });
+	mCamera.SetLookAt({ 0.0f, 0.0f, 0.0f });
 
 	mMeshBuffer.Initialize(mVertices.data(), sizeof(Vertex), mVertices.size());
 	mConstantBuffer.Initialize(sizeof(Matrix4));
 
 	std::filesystem::path shaderFile = L"../../Assets/Shaders/DoTransform.fx";
 	mVertexShader.Initialize(shaderFile, VE_Position | VE_Color);
+	mPixelShader.Initialize(shaderFile);
 
-	//=====================================================
-	// create a pixel shader
-	//=====================================================
-
-	auto device = GraphicsSystem::Get()->GetDevice();
-	DWORD shaderFlags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
-	ID3DBlob* shaderBlob = nullptr;
-	ID3DBlob* errorBlob = nullptr;
-
-	HRESULT hr = D3DCompileFromFile(
-		shaderFile.c_str(),
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		"PS", "ps_5_0",
-		shaderFlags, 0,
-		&shaderBlob,
-		&errorBlob);
-	if (errorBlob != nullptr && errorBlob->GetBufferPointer() != nullptr)
-	{
-		LOG("%s", static_cast<const char*>(errorBlob->GetBufferPointer()));
-	}
-	ASSERT(SUCCEEDED(hr), "Failed to compile pixel shader");
-
-	hr = device->CreatePixelShader(
-		shaderBlob->GetBufferPointer(),
-		shaderBlob->GetBufferSize(),
-		nullptr,
-		&mPixelShader);
-	ASSERT(SUCCEEDED(hr), "Failed to create pixel shader");
-	SafeRelease(shaderBlob);
-	SafeRelease(errorBlob);
 }
 
 void ShapeState::Terminate()
 {
+	mPixelShader.Terminate();
 	mConstantBuffer.Terminate();
 	mMeshBuffer.Terminate();
 	mVertexShader.Terminate();
 	mVertices.clear();
-	SafeRelease(mPixelShader);
 }
 float gRotationY = 0.0f;
 float gRotationX = 0.0f;
@@ -128,10 +98,7 @@ void ShapeState::Update(float deltaTime)
 void ShapeState::Render()
 {
 	mVertexShader.Bind();
-
-	// Pixel Shader
-	auto context = GraphicsSystem::Get()->GetContext();
-	context->PSSetShader(mPixelShader, nullptr, 0);
+	mPixelShader.Bind();
 
 	// Constant Buffer
 	Matrix4 matWorld = Matrix4::RotationY(gRotationY) * Matrix4::RotationX(gRotationX);

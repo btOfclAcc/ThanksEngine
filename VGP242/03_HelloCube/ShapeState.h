@@ -26,6 +26,5 @@ protected:
 	ThanksEngine::Graphics::ConstantBuffer mConstantBuffer;
 	ThanksEngine::Graphics::MeshBuffer mMeshBuffer;
 	ThanksEngine::Graphics::VertexShader mVertexShader;
-
-	ID3D11PixelShader* mPixelShader = nullptr;
+	ThanksEngine::Graphics::PixelShader mPixelShader;
 };
