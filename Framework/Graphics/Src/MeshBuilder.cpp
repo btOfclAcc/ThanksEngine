@@ -115,7 +115,180 @@ MeshPC MeshBuilder::CreateCubePC(float size)
 	return mesh;
 }
 
-MeshPC ThanksEngine::Graphics::MeshBuilder::CreateRectPC(float width, float length, float height)
+MeshPX MeshBuilder::CreateCubePX(float size)
+{
+	MeshPX mesh;
+
+	const float hs = size * 0.5f;
+	const float ot = 1.0f / 3.0f; // one thirds
+	const float tt = 2.0f / 3.0f; // two thirds
+
+	// front
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+														   
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+														   
+	// right											   
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, { 0.75f,   ot } });
+														   
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, { 0.75f,   ot } });
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, { 0.75f,   tt } });
+														   
+	// back												   
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, { 0.75f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, { 0.75f,   ot } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  1.0f,   ot } });
+														   
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, { 0.75f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  1.0f,   ot } });
+	mesh.vertices.push_back({ { -hs, -hs,  hs}, {  1.0f,   tt } });
+														   
+	// left												   
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  0.0f,   ot } });
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+														   
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ { -hs, -hs,  hs}, {  0.0f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  0.0f,   ot } });
+														   
+	// top												   
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, { 0.25f, 0.0f } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, {  0.5f, 0.0f } });
+
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, {  0.5f, 0.0f } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+
+	// bottom
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, {  0.5f, 1.0f } });
+	mesh.vertices.push_back({ { -hs, -hs,  hs}, { 0.25f, 1.0f } });
+
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, {  0.5f, 1.0f } });
+
+	for (uint32_t i = 0; i < mesh.vertices.size(); i++)
+	{
+		mesh.indices.push_back(i);
+	}
+
+	return mesh;
+}
+
+MeshPX MeshBuilder::CreateSkyBoxPX(float size)
+{
+	MeshPX mesh;
+
+	const float hs = size * 0.5f;
+	const float ot = 1.0f / 3.0f; // one thirds
+	const float tt = 2.0f / 3.0f; // two thirds
+
+	// front
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+
+	// right											   
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, { 0.75f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, { 0.75f,   tt } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, { 0.75f,   ot } });
+
+	// back												   
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, { 0.75f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  1.0f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, { 0.75f,   ot } });
+
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, { 0.75f,   tt } });
+	mesh.vertices.push_back({ { -hs, -hs,  hs}, {  1.0f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  1.0f,   ot } });
+
+	// left												   
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  0.0f,   ot } });
+
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, {  0.0f,   ot } });
+	mesh.vertices.push_back({ { -hs, -hs,  hs}, {  0.0f,   tt } });
+
+	// top												   
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, {  0.5f, 0.0f } });
+	mesh.vertices.push_back({ { -hs,  hs,  hs}, { 0.25f, 0.0f } });
+
+	mesh.vertices.push_back({ { -hs,  hs, -hs}, { 0.25f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs, -hs}, {  0.5f,   ot } });
+	mesh.vertices.push_back({ {  hs,  hs,  hs}, {  0.5f, 0.0f } });
+
+	// bottom
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ { -hs, -hs,  hs}, { 0.25f, 1.0f } });
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, {  0.5f, 1.0f } });
+
+	mesh.vertices.push_back({ { -hs, -hs, -hs}, { 0.25f,   tt } });
+	mesh.vertices.push_back({ {  hs, -hs,  hs}, {  0.5f, 1.0f } });
+	mesh.vertices.push_back({ {  hs, -hs, -hs}, {  0.5f,   tt } });
+
+	for (uint32_t i = 0; i < mesh.vertices.size(); i++)
+	{
+		mesh.indices.push_back(i);
+	}
+
+	return mesh;
+}
+
+MeshPX MeshBuilder::CreateSkySpherePX(int slices, int rings, float radius)
+{
+	MeshPX mesh;
+
+	float vertRotation = (Math::Constants::Pi / static_cast<float>(rings - 1));
+	float horzRotation = (Math::Constants::TwoPi / static_cast<float>(slices));
+	float uStep = 1.0f / static_cast<float>(slices);
+	float vStep = 1.0f / static_cast<float>(rings);
+
+	for (int r = 0; r <= rings; ++r)
+	{
+		float ring = static_cast<float>(r);
+		float phi = ring * vertRotation;
+		for (int s = 0; s <= slices; ++s)
+		{
+			float slice = static_cast<float>(s);
+			float rotation = slice * horzRotation;
+
+			float u = 1.0f - (slice * uStep);
+			float v = ring * vStep;
+			mesh.vertices.push_back({ {
+					radius * cos(rotation) * sin(phi),
+					radius * cos(phi),
+					radius * sin(rotation) * sin(phi)},
+					{ u, v } });
+		}
+	}
+
+	CreatePlaneIndices(mesh.indices, rings, slices);
+
+	return mesh;
+}
+
+MeshPC MeshBuilder::CreateRectPC(float width, float length, float height)
 {
 	MeshPC mesh;
 
@@ -258,6 +431,39 @@ MeshPC MeshBuilder::CreateSpherePC(int slices, int rings, float radius)
 					radius * cos(phi),
 					radius * cos(rotation) * sin(phi)},
 				GetNextColor(index) });
+		}
+	}
+
+	CreatePlaneIndices(mesh.indices, rings, slices);
+
+	return mesh;
+}
+
+MeshPX MeshBuilder::CreateSpherePX(int slices, int rings, float radius)
+{
+	MeshPX mesh;
+
+	float vertRotation = (Math::Constants::Pi / static_cast<float>(rings - 1));
+	float horzRotation = (Math::Constants::TwoPi / static_cast<float>(slices));
+	float uStep = 1.0f / static_cast<float>(slices);
+	float vStep = 1.0f / static_cast<float>(rings);
+
+	for (int r = 0; r <= rings; ++r)
+	{
+		float ring = static_cast<float>(r);
+		float phi = ring * vertRotation;
+		for (int s = 0; s <= slices; ++s)
+		{
+			float slice = static_cast<float>(s);
+			float rotation = slice * horzRotation;
+
+			float u = 1.0f - (slice * uStep);
+			float v = ring * vStep;
+			mesh.vertices.push_back({ {
+					radius * sin(rotation) * sin(phi),
+					radius * cos(phi),
+					radius * cos(rotation) * sin(phi)}, 
+					{ u, v } });
 		}
 	}
 

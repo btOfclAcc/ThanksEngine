@@ -27,8 +27,6 @@ namespace ThanksEngine::Graphics
 		void SetNearPlane(float nearPlane);
 		void SetFarPlane(float farPlane);
 
-		// Movement Calls
-
 		// Return Values
 		const Math::Vector3& GetPosition() const;
 		const Math::Vector3& GetDirection() const;
@@ -39,6 +37,15 @@ namespace ThanksEngine::Graphics
 		// ProjectionMode Transforms
 		Math::Matrix4 GetPerspcetiveMatrix() const;
 		Math::Matrix4 GetOrthographicMatrix() const;
+
+		// Movement Calls
+		void Walk(float distance);
+		void Strafe(float distance);
+		void Rise(float distance);
+
+		// Rotation Calls
+		void Yaw(float radians);
+		void Pitch(float radians);
 
 	private:
 		ProjectionMode mProjectionMode = ProjectionMode::Perspective;

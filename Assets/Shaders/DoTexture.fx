@@ -11,13 +11,13 @@ SamplerState textureSampler : register(s0);
 struct VS_INPUT
 {
     float3 position : POSITION;
-    float2 texCoord : TEXTCOORD;
+    float2 texCoord : TEXCOORD;
 };
 
 struct VS_OUTPUT
 {
     float4 position : SV_POSITION;
-    float2 texCoord : TEXTCOORD;
+    float2 texCoord : TEXCOORD;
 };
 
 VS_OUTPUT VS(VS_INPUT input)

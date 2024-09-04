@@ -9,6 +9,11 @@ namespace ThanksEngine::Graphics
 	public:
 		// Cube
 		static MeshPC CreateCubePC(float size);
+		static MeshPX CreateCubePX(float size);
+
+		// SkyStuff
+		static MeshPX CreateSkyBoxPX(float size);
+		static MeshPX CreateSkySpherePX(int slices, int rings, float radius);
 
 		// Rectangle
 		static MeshPC CreateRectPC(float width, float length, float height);
@@ -22,5 +27,6 @@ namespace ThanksEngine::Graphics
 
 		// Sphere
 		static MeshPC CreateSpherePC(int slices, int rings, float radius);
+		static MeshPX CreateSpherePX(int slices, int rings, float radius);
 	};
 }
