@@ -22,6 +22,8 @@ void App::Run(const AppConfig& config)
 	auto handle = myWindow.GetWindowHandle();
 	GraphicsSystem::StaticInitialize(handle, false);
 	InputSystem::StaticInitialize(handle);
+	DebugUI::StaticInitialize(handle, false, true);
+	SimpleDraw::StaticInitialize(config.maxDrawLines);
 
 	// start state
 	ASSERT(mCurrentState != nullptr, "App: no current state available");
@@ -40,6 +42,7 @@ void App::Run(const AppConfig& config)
 		if (!myWindow.IsActive() || input->IsKeyPressed(KeyCode::ESCAPE))
 		{
 			Quit();
+			break;
 		}
 
 		if (mNextState != nullptr)
@@ -59,12 +62,17 @@ void App::Run(const AppConfig& config)
 
 		gs->BeginRender();
 			mCurrentState->Render();
+			DebugUI::BeginRender();
+				mCurrentState->DebugUI();
+			DebugUI::EndRender();
 		gs->EndRender();
 	}
 	// end state
 	mCurrentState->Terminate();
 
 	// terminate singletons
+	SimpleDraw::StaticTerminate();
+	DebugUI::StaticTerminate();
 	InputSystem::StaticTerminate();
 	GraphicsSystem::StaticTerminate();
 
