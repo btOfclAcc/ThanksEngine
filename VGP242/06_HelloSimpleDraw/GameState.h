@@ -10,6 +10,7 @@ enum class DebugDrawType
 	AABB,
 	FilledAABB,
 	GroundCircle,
+	Pyramid
 };
 
 class GameState : public ThanksEngine::AppState

@@ -14,6 +14,7 @@ const char* gDrawType[] =
 	"AABB",
 	"FilledAABB",
 	"GroundCircle",
+	"Pyramid"
 };
 
 void GameState::Initialize()
@@ -69,6 +70,10 @@ void GameState::UpdateCamera(float deltaTime)
 
 Vector3 v0 = Vector3::Zero;
 Vector3 v1 = Vector3::One;
+Vector3 p0 = { -0.5f, 0.0f, 0.5f };
+Vector3 p1 = { 0.5f, 0.0f, 0.5f };
+Vector3 p2 = { 0.0f, 0.0f, -0.5f };
+Vector3 p3 = { 0.0f, 1.0f, 0.0f };
 int slices = 30;
 int rings = 30;
 float radius = 1.0f;
@@ -101,6 +106,15 @@ void GameState::Render()
 	else if (mDebugDrawType == DebugDrawType::GroundCircle)
 	{
 		SimpleDraw::AddGroundCircle(slicesC, radiusC, lineColor);
+	}
+	else if (mDebugDrawType == DebugDrawType::Pyramid)
+	{
+		SimpleDraw::AddLine(p0, p1, lineColor);
+		SimpleDraw::AddLine(p0, p2, lineColor);
+		SimpleDraw::AddLine(p0, p3, lineColor);
+		SimpleDraw::AddLine(p1, p2, lineColor);
+		SimpleDraw::AddLine(p1, p3, lineColor);
+		SimpleDraw::AddLine(p2, p3, lineColor);
 	}
 	SimpleDraw::AddGroundPlane(10.0f, Colors::White);
 	SimpleDraw::Render(mCamera);
@@ -141,6 +155,18 @@ void GameState::DebugUI()
 		ImGui::DragFloat3("Point 1", &v0.x, 0.1f);
 		ImGui::DragFloat3("Point 2", &v1.x, 0.1f);
 		ImGui::ColorEdit4("Color", &lineColor.r);
+	}
+	else if (mDebugDrawType == DebugDrawType::Pyramid)
+	{
+		ImGui::DragFloat3("Point 1", &p0.x, 0.1f);
+		ImGui::DragFloat3("Point 2", &p1.x, 0.1f);
+		ImGui::DragFloat3("Point 3", &p2.x, 0.1f);
+		ImGui::DragFloat3("Point 4", &p3.x, 0.1f);
+		ImGui::ColorEdit4("Color", &lineColor.r);
+	}
+	else if (mDebugDrawType == DebugDrawType::None)
+	{
+		ImGui::Text("Select a draw type");
 	}
 	ImGui::ColorEdit4("Color", &lineColor.r);
 	ImGui::End();
