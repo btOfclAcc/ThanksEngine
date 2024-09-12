@@ -27,234 +27,155 @@ void GameState::Initialize()
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, 109.0f);
 
-		mMeshBufferSun.Initialize<MeshPX>(mesh);
+		mSun.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderSun.Initialize<VertexPX>(shaderFile);
-		mPixelShaderSun.Initialize(shaderFile);
+		mSun.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mSun.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureSun.Initialize("../../Assets/Images/planets/sun.jpg");
-		mSamplerSun.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mSun.mDiffuseTexture.Initialize("../../Assets/Images/planets/sun.jpg");
+		mSun.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Mercury
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.33f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.383f);
 
-		mMeshBufferMercury.Initialize<MeshPX>(mesh);
+		mMercury.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderMercury.Initialize<VertexPX>(shaderFile);
-		mPixelShaderMercury.Initialize(shaderFile);
+		mMercury.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mMercury.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureMercury.Initialize("../../Assets/Images/planets/mercury.jpg");
-		mSamplerMercury.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mMercury.mDiffuseTexture.Initialize("../../Assets/Images/planets/mercury.jpg");
+		mMercury.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Venus
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 1.0f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.949f);
 
-		mMeshBufferVenus.Initialize<MeshPX>(mesh);
+		mVenus.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderVenus.Initialize<VertexPX>(shaderFile);
-		mPixelShaderVenus.Initialize(shaderFile);
+		mVenus.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mVenus.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureVenus.Initialize("../../Assets/Images/planets/venus.jpg");
-		mSamplerVenus.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mVenus.mDiffuseTexture.Initialize("../../Assets/Images/planets/venus.jpg");
+		mVenus.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Earth
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, 1.0f);
 
-		mMeshBufferEarth.Initialize<MeshPX>(mesh);
+		mEarth.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderEarth.Initialize<VertexPX>(shaderFile);
-		mPixelShaderEarth.Initialize(shaderFile);
+		mEarth.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mEarth.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureEarth.Initialize("../../Assets/Images/planets/earth/earth.jpg");
-		mSamplerEarth.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mEarth.mDiffuseTexture.Initialize("../../Assets/Images/planets/earth/earth.jpg");
+		mEarth.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Mars
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.5f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.532f);
 
-		mMeshBufferMars.Initialize<MeshPX>(mesh);
+		mMars.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderMars.Initialize<VertexPX>(shaderFile);
-		mPixelShaderMars.Initialize(shaderFile);
+		mMars.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mMars.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureMars.Initialize("../../Assets/Images/planets/mars.jpg");
-		mSamplerMars.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mMars.mDiffuseTexture.Initialize("../../Assets/Images/planets/mars.jpg");
+		mMars.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Jupiter
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 11.0f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 11.21f);
 
-		mMeshBufferJupiter.Initialize<MeshPX>(mesh);
+		mJupiter.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderJupiter.Initialize<VertexPX>(shaderFile);
-		mPixelShaderJupiter.Initialize(shaderFile);
+		mJupiter.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mJupiter.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureJupiter.Initialize("../../Assets/Images/planets/jupiter.jpg");
-		mSamplerJupiter.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mJupiter.mDiffuseTexture.Initialize("../../Assets/Images/planets/jupiter.jpg");
+		mJupiter.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Saturn
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 9.0f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 9.45f);
 
-		mMeshBufferSaturn.Initialize<MeshPX>(mesh);
+		mSaturn.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderSaturn.Initialize<VertexPX>(shaderFile);
-		mPixelShaderSaturn.Initialize(shaderFile);
+		mSaturn.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mSaturn.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureSaturn.Initialize("../../Assets/Images/planets/saturn.jpg");
-		mSamplerSaturn.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mSaturn.mDiffuseTexture.Initialize("../../Assets/Images/planets/saturn.jpg");
+		mSaturn.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Uranus
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 4.0f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 4.01f);
 
-		mMeshBufferUranus.Initialize<MeshPX>(mesh);
+		mUranus.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderUranus.Initialize<VertexPX>(shaderFile);
-		mPixelShaderUranus.Initialize(shaderFile);
+		mUranus.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mUranus.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureUranus.Initialize("../../Assets/Images/planets/uranus.jpg");
-		mSamplerUranus.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mUranus.mDiffuseTexture.Initialize("../../Assets/Images/planets/uranus.jpg");
+		mUranus.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Neptune
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 4.0f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 3.88f);
 
-		mMeshBufferNeptune.Initialize<MeshPX>(mesh);
+		mNeptune.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderNeptune.Initialize<VertexPX>(shaderFile);
-		mPixelShaderNeptune.Initialize(shaderFile);
+		mNeptune.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mNeptune.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTextureNeptune.Initialize("../../Assets/Images/planets/neptune.jpg");
-		mSamplerNeptune.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mNeptune.mDiffuseTexture.Initialize("../../Assets/Images/planets/neptune.jpg");
+		mNeptune.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 
 	// Pluto
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.16f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.186f);
 
-		mMeshBufferPluto.Initialize<MeshPX>(mesh);
+		mPluto.mMeshBuffer.Initialize<MeshPX>(mesh);
 
 		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVertexShaderPluto.Initialize<VertexPX>(shaderFile);
-		mPixelShaderPluto.Initialize(shaderFile);
+		mPluto.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mPluto.mPixelShader.Initialize(shaderFile);
 
-		mDiffuseTexturePluto.Initialize("../../Assets/Images/planets/pluto.jpg");
-		mSamplerPluto.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+		mPluto.mDiffuseTexture.Initialize("../../Assets/Images/planets/pluto.jpg");
+		mPluto.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 }
 
 void GameState::Terminate()
 {
-	// Pluto
-	{
-		mSamplerPluto.Terminate();
-		mDiffuseTexturePluto.Terminate();
-		mPixelShaderPluto.Terminate();
-		mMeshBufferPluto.Terminate();
-		mVertexShaderPluto.Terminate();
-	}
-
-	// Neptune
-	{
-		mSamplerNeptune.Terminate();
-		mDiffuseTextureNeptune.Terminate();
-		mPixelShaderNeptune.Terminate();
-		mMeshBufferNeptune.Terminate();
-		mVertexShaderNeptune.Terminate();
-	}
-
-	// Uranus
-	{
-		mSamplerUranus.Terminate();
-		mDiffuseTextureUranus.Terminate();
-		mPixelShaderUranus.Terminate();
-		mMeshBufferUranus.Terminate();
-		mVertexShaderUranus.Terminate();
-	}
-
-	// Saturn
-	{
-		mSamplerSaturn.Terminate();
-		mDiffuseTextureSaturn.Terminate();
-		mPixelShaderSaturn.Terminate();
-		mMeshBufferSaturn.Terminate();
-		mVertexShaderSaturn.Terminate();
-	}
-
-	// Jupiter
-	{
-		mSamplerJupiter.Terminate();
-		mDiffuseTextureJupiter.Terminate();
-		mPixelShaderJupiter.Terminate();
-		mMeshBufferJupiter.Terminate();
-		mVertexShaderJupiter.Terminate();
-	}
-
-	// Mars
-	{
-		mSamplerMars.Terminate();
-		mDiffuseTextureMars.Terminate();
-		mPixelShaderMars.Terminate();
-		mMeshBufferMars.Terminate();
-		mVertexShaderMars.Terminate();
-	}
-
-	// Earth
-	{
-		mSamplerEarth.Terminate();
-		mDiffuseTextureEarth.Terminate();
-		mPixelShaderEarth.Terminate();
-		mMeshBufferEarth.Terminate();
-		mVertexShaderEarth.Terminate();
-	}
-
-	// Venus
-	{
-		mSamplerVenus.Terminate();
-		mDiffuseTextureVenus.Terminate();
-		mPixelShaderVenus.Terminate();
-		mMeshBufferVenus.Terminate();
-		mVertexShaderVenus.Terminate();
-	}
-
-	// Mercury
-	{
-		mSamplerMercury.Terminate();
-		mDiffuseTextureMercury.Terminate();
-		mPixelShaderMercury.Terminate();
-		mMeshBufferMercury.Terminate();
-		mVertexShaderMercury.Terminate();
-	}
-
-	// Sun
-	{
-		mSamplerSun.Terminate();
-		mDiffuseTextureSun.Terminate();
-		mPixelShaderSun.Terminate();
-		mMeshBufferSun.Terminate();
-		mVertexShaderSun.Terminate();
-	}
+	mPluto.Terminate();
+	mNeptune.Terminate();
+	mUranus.Terminate();
+	mSaturn.Terminate();
+	mJupiter.Terminate();
+	mMars.Terminate();
+	mEarth.Terminate();
+	mVenus.Terminate();
+	mMercury.Terminate();
+	mSun.Terminate();
 
 	mConstantBuffer.Terminate();
 	mRenderTarget.Terminate();
@@ -314,115 +235,86 @@ void GameState::Render()
 	mConstantBuffer.Update(&wvp);
 	mConstantBuffer.BindVS(0);
 	
-	// Sun
-	{
-		mVertexShaderSun.Bind();
-		mPixelShaderSun.Bind();
+	mSun.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f);
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-		mDiffuseTextureSun.BindPS(0);
-		mSamplerSun.BindPS(0);
+	mMercury.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.2f) * Matrix4::Translation({ 0.0f, 0.0f, 9089.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-		mMeshBufferSun.Render();
-	}
+	mVenus.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.4f) * Matrix4::Translation({ 0.0f, 0.0f, 16989.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-	// Mercury
-	{
-		mVertexShaderMercury.Bind();
-		mPixelShaderMercury.Bind();
+	mEarth.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 23483.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-		mDiffuseTextureMercury.BindPS(0);
-		mSamplerMercury.BindPS(0);
+	mMars.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 35772.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-		mMeshBufferMercury.Render();
-	}
+	mJupiter.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 122174.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-	// Venus
-	{
-		mVertexShaderVenus.Bind();
-		mPixelShaderVenus.Bind();
+	mSaturn.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 223867.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-		mDiffuseTextureVenus.BindPS(0);
-		mSamplerVenus.BindPS(0);
+	mUranus.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 450409.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-		mMeshBufferVenus.Render();
-	}
+	mNeptune.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 705693.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-	// Earth
-	{
-		mVertexShaderEarth.Bind();
-		mPixelShaderEarth.Bind();
+	mPluto.Render();
+	matWorld = Matrix4::Identity;
+	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 926610.0f / 50.0f });
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
 
-		mDiffuseTextureEarth.BindPS(0);
-		mSamplerEarth.BindPS(0);
-
-		mMeshBufferEarth.Render();
-	}
-
-	// Mars
-	{
-		mVertexShaderMars.Bind();
-		mPixelShaderMars.Bind();
-
-		mDiffuseTextureMars.BindPS(0);
-		mSamplerMars.BindPS(0);
-
-		mMeshBufferMars.Render();
-	}
-
-	// Jupiter
-	{
-		mVertexShaderJupiter.Bind();
-		mPixelShaderJupiter.Bind();
-
-		mDiffuseTextureJupiter.BindPS(0);
-		mSamplerJupiter.BindPS(0);
-
-		mMeshBufferJupiter.Render();
-	}
-
-	// Saturn
-	{
-		mVertexShaderSaturn.Bind();
-		mPixelShaderSaturn.Bind();
-
-		mDiffuseTextureSaturn.BindPS(0);
-		mSamplerSaturn.BindPS(0);
-
-		mMeshBufferSaturn.Render();
-	}
-
-	// Uranus
-	{
-		mVertexShaderUranus.Bind();
-		mPixelShaderUranus.Bind();
-
-		mDiffuseTextureUranus.BindPS(0);
-		mSamplerUranus.BindPS(0);
-
-		mMeshBufferUranus.Render();
-	}
-
-	// Neptune
-	{
-		mVertexShaderNeptune.Bind();
-		mPixelShaderNeptune.Bind();
-
-		mDiffuseTextureNeptune.BindPS(0);
-		mSamplerNeptune.BindPS(0);
-
-		mMeshBufferNeptune.Render();
-	}
-
-	// Pluto
-	{
-		mVertexShaderPluto.Bind();
-		mPixelShaderPluto.Bind();
-
-		mDiffuseTexturePluto.BindPS(0);
-		mSamplerPluto.BindPS(0);
-
-		mMeshBufferPluto.Render();
-	}
 
 	matWorld = Matrix4::Identity;
 	matView = mRenderTargetCamera.GetViewMatrix();
@@ -436,103 +328,43 @@ void GameState::Render()
 	switch (target)
 	{
 		case 0: // Sun
-			mVertexShaderSun.Bind();
-			mPixelShaderSun.Bind();
-
-			mDiffuseTextureSun.BindPS(0);
-			mSamplerSun.BindPS(0);
-
-			mMeshBufferSun.Render();
+			mSun.Render();
 			break;
 		
 		case 1: // Mercury
-			mVertexShaderMercury.Bind();
-			mPixelShaderMercury.Bind();
-
-			mDiffuseTextureMercury.BindPS(0);
-			mSamplerMercury.BindPS(0);
-
-			mMeshBufferMercury.Render();
+			mMercury.Render();
 			break;
 
 		case 2: // Venus
-			mVertexShaderVenus.Bind();
-			mPixelShaderVenus.Bind();
-
-			mDiffuseTextureVenus.BindPS(0);
-			mSamplerVenus.BindPS(0);
-
-			mMeshBufferVenus.Render();
+			mVenus.Render();
 			break;
 
 		case 3: // Earth
-			mVertexShaderEarth.Bind();
-			mPixelShaderEarth.Bind();
-
-			mDiffuseTextureEarth.BindPS(0);
-			mSamplerEarth.BindPS(0);
-
-			mMeshBufferEarth.Render();
+			mEarth.Render();
 			break;
 
 		case 4: // Mars
-			mVertexShaderMars.Bind();
-			mPixelShaderMars.Bind();
-
-			mDiffuseTextureMars.BindPS(0);
-			mSamplerMars.BindPS(0);
-
-			mMeshBufferMars.Render();
+			mMars.Render();
 			break;
 
 		case 5: // Jupiter
-			mVertexShaderJupiter.Bind();
-			mPixelShaderJupiter.Bind();
-
-			mDiffuseTextureJupiter.BindPS(0);
-			mSamplerJupiter.BindPS(0);
-
-			mMeshBufferJupiter.Render();
+			mJupiter.Render();
 			break;
 
 		case 6: // Saturn
-			mVertexShaderSaturn.Bind();
-			mPixelShaderSaturn.Bind();
-
-			mDiffuseTextureSaturn.BindPS(0);
-			mSamplerSaturn.BindPS(0);
-
-			mMeshBufferSaturn.Render();
+			mSaturn.Render();
 			break;
 
 		case 7: // Uranus
-			mVertexShaderUranus.Bind();
-			mPixelShaderUranus.Bind();
-
-			mDiffuseTextureUranus.BindPS(0);
-			mSamplerUranus.BindPS(0);
-
-			mMeshBufferUranus.Render();
+			mUranus.Render();
 			break;
 
 		case 8: // Neptune
-			mVertexShaderNeptune.Bind();
-			mPixelShaderNeptune.Bind();
-
-			mDiffuseTextureNeptune.BindPS(0);
-			mSamplerNeptune.BindPS(0);
-
-			mMeshBufferNeptune.Render();
+			mNeptune.Render();
 			break;
 
 		case 9: // Pluto
-			mVertexShaderPluto.Bind();
-			mPixelShaderPluto.Bind();
-
-			mDiffuseTexturePluto.BindPS(0);
-			mSamplerPluto.BindPS(0);
-
-			mMeshBufferPluto.Render();
+			mPluto.Render();
 			break;
 
 		default:
