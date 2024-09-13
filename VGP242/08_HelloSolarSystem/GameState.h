@@ -1,11 +1,19 @@
 #pragma once
 
 #include <ThanksEngine/Inc/ThanksEngine.h>
-#include <map>
+#include <vector>
 
 class RenderItem
 {
 public:
+	float mRotationPeriod;
+	float mOrbitPeriod;
+
+	float mRotationSpeed;
+	float mTilt;
+	float mDistanceFromSun;
+	float mOrbitSpeed;
+
 	ThanksEngine::Graphics::MeshBuffer mMeshBuffer;
 	ThanksEngine::Graphics::VertexShader mVertexShader;
 	ThanksEngine::Graphics::PixelShader mPixelShader;
@@ -45,11 +53,14 @@ public:
 protected:
 	void UpdateCamera(float deltaTime);
 
+	float time;
 
 	ThanksEngine::Graphics::Camera mCamera;
 	ThanksEngine::Graphics::Camera mRenderTargetCamera;
 	ThanksEngine::Graphics::ConstantBuffer mConstantBuffer;
 	ThanksEngine::Graphics::RenderTarget mRenderTarget;
+
+	std::vector<RenderItem*> renderItems;
 
 	RenderItem mSun;
 	RenderItem mMercury;
@@ -61,4 +72,5 @@ protected:
 	RenderItem mUranus;
 	RenderItem mNeptune;
 	RenderItem mPluto;
+	RenderItem mSkySphere;
 };

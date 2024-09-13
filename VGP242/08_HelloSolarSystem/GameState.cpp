@@ -1,5 +1,13 @@
 #include "GameState.h"
 
+#define ToScale FALSE
+
+#if ToScale
+#define reducer 50.0f
+#else
+#define reducer 1.0f
+#endif
+
 using namespace ThanksEngine;
 using namespace ThanksEngine::Math;
 using namespace ThanksEngine::Graphics;
@@ -8,6 +16,8 @@ using namespace ThanksEngine::Input;
 
 void GameState::Initialize()
 {
+	time = 0.0f;
+
 	mCamera.SetPosition({ 0.0f, 1.0f, -3.0f });
 	mCamera.SetLookAt({ 0.0f, 0.0f, 0.0f });
 
@@ -25,7 +35,7 @@ void GameState::Initialize()
 
 	// Sun
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 109.0f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 109.0f : 3.0f);
 
 		mSun.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -35,11 +45,19 @@ void GameState::Initialize()
 
 		mSun.mDiffuseTexture.Initialize("../../Assets/Images/planets/sun.jpg");
 		mSun.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mSun.mRotationPeriod = -27.0f;
+		mSun.mOrbitPeriod = 0.0f;
+
+		mSun.mRotationSpeed = 1 / -27.0f;
+		mSun.mTilt = 7.25f;
+		mSun.mDistanceFromSun = (ToScale) ? 0.0f : 0.0f;
+		mSun.mOrbitSpeed = 0.0f;
 	}
 
 	// Mercury
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.383f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.383f : 0.5f);
 
 		mMercury.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -49,11 +67,19 @@ void GameState::Initialize()
 
 		mMercury.mDiffuseTexture.Initialize("../../Assets/Images/planets/mercury.jpg");
 		mMercury.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mMercury.mRotationPeriod = -58.6f;
+		mMercury.mOrbitPeriod = 87.97f;
+
+		mMercury.mRotationSpeed = 1 / -58.6f;
+		mMercury.mTilt = 0.034f;
+		mMercury.mDistanceFromSun = (ToScale) ? 9089.0f : 10.0f;
+		mMercury.mOrbitSpeed = 1 / 87.97f;
 	}
 
 	// Venus
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.949f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.949f : 1.0f);
 
 		mVenus.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -63,11 +89,19 @@ void GameState::Initialize()
 
 		mVenus.mDiffuseTexture.Initialize("../../Assets/Images/planets/venus.jpg");
 		mVenus.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mVenus.mRotationPeriod = 243.0f;
+		mVenus.mOrbitPeriod = 224.55f;
+
+		mVenus.mRotationSpeed = 1 / 243.0f;
+		mVenus.mTilt = 177.4f;
+		mVenus.mDistanceFromSun = (ToScale) ? 16989.0f : 7.0f;
+		mVenus.mOrbitSpeed = 1 / 224.55f;
 	}
 
 	// Earth
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 1.0f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 1.0f : 1.0f);
 
 		mEarth.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -77,11 +111,19 @@ void GameState::Initialize()
 
 		mEarth.mDiffuseTexture.Initialize("../../Assets/Images/planets/earth/earth.jpg");
 		mEarth.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mEarth.mRotationPeriod = -1.0f;
+		mEarth.mOrbitPeriod = 365.01f;
+
+		mEarth.mRotationSpeed = 1 / -1.0f;
+		mEarth.mTilt = 23.4f;
+		mEarth.mDistanceFromSun = (ToScale) ? 23483.0f : 20.0f;
+		mEarth.mOrbitSpeed = 1 / 365.01f;
 	}
 
 	// Mars
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.532f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.532f : 0.5f);
 
 		mMars.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -91,11 +133,19 @@ void GameState::Initialize()
 
 		mMars.mDiffuseTexture.Initialize("../../Assets/Images/planets/mars.jpg");
 		mMars.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mMars.mRotationPeriod = -1.0f;
+		mMars.mOrbitPeriod = 686.98f;
+
+		mMars.mRotationSpeed = 1 / -1.0f;
+		mMars.mTilt = 25.2f;
+		mMars.mDistanceFromSun = (ToScale) ? 35772.0f : 24.0f;
+		mMars.mOrbitSpeed = 1 / 686.98f;
 	}
 
 	// Jupiter
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 11.21f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 11.21f : 2.0f);
 
 		mJupiter.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -105,11 +155,19 @@ void GameState::Initialize()
 
 		mJupiter.mDiffuseTexture.Initialize("../../Assets/Images/planets/jupiter.jpg");
 		mJupiter.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mJupiter.mRotationPeriod = -0.41f;
+		mJupiter.mOrbitPeriod = 4332.82f;
+
+		mJupiter.mRotationSpeed = 1 / -0.41f;
+		mJupiter.mTilt = 3.1f;
+		mJupiter.mDistanceFromSun = (ToScale) ? 122174.0f : 40.0f;
+		mJupiter.mOrbitSpeed = 1 / 4332.82f;
 	}
 
 	// Saturn
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 9.45f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 9.45f : 2.0f);
 
 		mSaturn.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -119,11 +177,19 @@ void GameState::Initialize()
 
 		mSaturn.mDiffuseTexture.Initialize("../../Assets/Images/planets/saturn.jpg");
 		mSaturn.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mSaturn.mRotationPeriod = -0.45f;
+		mSaturn.mOrbitPeriod = 10759.22f;
+
+		mSaturn.mRotationSpeed = 1 / -0.45f;
+		mSaturn.mTilt = 26.7f;
+		mSaturn.mDistanceFromSun = (ToScale) ? 223867.0f : 50.0f;
+		mSaturn.mOrbitSpeed = 1 / 10759.22f;
 	}
 
 	// Uranus
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 4.01f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 4.01f : 1.5f);
 
 		mUranus.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -133,11 +199,19 @@ void GameState::Initialize()
 
 		mUranus.mDiffuseTexture.Initialize("../../Assets/Images/planets/uranus.jpg");
 		mUranus.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mUranus.mRotationPeriod = 0.72f;
+		mUranus.mOrbitPeriod = 30685.0f;
+
+		mUranus.mRotationSpeed = 1 / 0.72f;
+		mUranus.mTilt = 97.8f;
+		mUranus.mDistanceFromSun = (ToScale) ? 450409.0f : 60.0f;
+		mUranus.mOrbitSpeed = 1 / 30685.0f;
 	}
 
 	// Neptune
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 3.88f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 3.88f : 1.5f);
 
 		mNeptune.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -147,11 +221,19 @@ void GameState::Initialize()
 
 		mNeptune.mDiffuseTexture.Initialize("../../Assets/Images/planets/neptune.jpg");
 		mNeptune.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mNeptune.mRotationPeriod = -0.67f;
+		mNeptune.mOrbitPeriod = 60190.03f;
+
+		mNeptune.mRotationSpeed = 1 / -0.67f;
+		mNeptune.mTilt = 28.3f;
+		mNeptune.mDistanceFromSun = (ToScale) ? 705693.0f : 66.0f;
+		mNeptune.mOrbitSpeed = 1 / 60190.03f;
 	}
 
 	// Pluto
 	{
-		mesh = MeshBuilder::CreateSpherePX(60, 60, 0.186f);
+		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.186f : 0.25f);
 
 		mPluto.mMeshBuffer.Initialize<MeshPX>(mesh);
 
@@ -161,11 +243,44 @@ void GameState::Initialize()
 
 		mPluto.mDiffuseTexture.Initialize("../../Assets/Images/planets/pluto.jpg");
 		mPluto.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
+		mPluto.mRotationPeriod = -6.39f;
+		mPluto.mOrbitPeriod = 90560.0f;
+
+		mPluto.mRotationSpeed = 1 / -6.39f;
+		mPluto.mTilt = 122.5f;
+		mPluto.mDistanceFromSun = (ToScale) ? 926610.0f : 72.0f;
+		mPluto.mOrbitSpeed = 1 / 90560.0f;
+	}
+
+	renderItems.push_back(&mSun);
+	renderItems.push_back(&mMercury);
+	renderItems.push_back(&mVenus);
+	renderItems.push_back(&mEarth);
+	renderItems.push_back(&mMars);
+	renderItems.push_back(&mJupiter);
+	renderItems.push_back(&mSaturn);
+	renderItems.push_back(&mUranus);
+	renderItems.push_back(&mNeptune);
+	renderItems.push_back(&mPluto);
+
+	{
+		mesh = MeshBuilder::CreateSkySpherePX(60, 60, mPluto.mDistanceFromSun * 2);
+
+		mSkySphere.mMeshBuffer.Initialize<MeshPX>(mesh);
+
+		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
+		mSkySphere.mVertexShader.Initialize<VertexPX>(shaderFile);
+		mSkySphere.mPixelShader.Initialize(shaderFile);
+
+		mSkySphere.mDiffuseTexture.Initialize("../../Assets/Images/skysphere/space.jpg");
+		mSkySphere.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 }
 
 void GameState::Terminate()
 {
+	mSkySphere.Terminate();
 	mPluto.Terminate();
 	mNeptune.Terminate();
 	mUranus.Terminate();
@@ -184,6 +299,7 @@ void GameState::Terminate()
 void GameState::Update(float deltaTime)
 {
 	UpdateCamera(deltaTime);
+	time += deltaTime;
 }
 
 void GameState::UpdateCamera(float deltaTime)
@@ -234,88 +350,30 @@ void GameState::Render()
 	Matrix4 wvp = Transpose(matFinal);
 	mConstantBuffer.Update(&wvp);
 	mConstantBuffer.BindVS(0);
+
+	for (auto renderItem : renderItems)
+	{
+		matWorld = Matrix4::Identity;
+		matWorld = 
+			Matrix4::RotationY(Math::Constants::Pi * renderItem->mRotationSpeed * time) * 
+			Matrix4::Translation({ 0.0f, 0.0f, renderItem->mDistanceFromSun / reducer}) * 
+			Matrix4::RotationY(Math::Constants::Pi * renderItem->mOrbitSpeed * time);
+		matFinal = matWorld * matView * matProj;
+		wvp = Transpose(matFinal);
+		mConstantBuffer.Update(&wvp);
+		mConstantBuffer.BindVS(0);
+		renderItem->Render();
+	}
+
+	matWorld = Matrix4::Identity;
+	matView = mCamera.GetViewMatrix();
+	matProj = mCamera.GetProjectionMatrix();
+	matFinal = matWorld * matView * matProj;
+	wvp = Transpose(matFinal);
+	mConstantBuffer.Update(&wvp);
+	mConstantBuffer.BindVS(0);
+	mSkySphere.Render();
 	
-	mSun.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f);
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mMercury.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.2f) * Matrix4::Translation({ 0.0f, 0.0f, 9089.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mVenus.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.4f) * Matrix4::Translation({ 0.0f, 0.0f, 16989.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mEarth.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 23483.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mMars.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 35772.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mJupiter.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 122174.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mSaturn.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 223867.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mUranus.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 450409.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mNeptune.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 705693.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-	mPluto.Render();
-	matWorld = Matrix4::Identity;
-	matWorld = Matrix4::RotationY(3.14f * 0.6f) * Matrix4::Translation({ 0.0f, 0.0f, 926610.0f / 50.0f });
-	matFinal = matWorld * matView * matProj;
-	wvp = Transpose(matFinal);
-	mConstantBuffer.Update(&wvp);
-	mConstantBuffer.BindVS(0);
-
-
 	matWorld = Matrix4::Identity;
 	matView = mRenderTargetCamera.GetViewMatrix();
 	matProj = mRenderTargetCamera.GetProjectionMatrix();
@@ -377,7 +435,7 @@ bool buttonValye = false;
 int intValue = 0;
 void GameState::DebugUI()
 {
-	SimpleDraw::AddGroundPlane(10.0f, Colors::White);
+	SimpleDraw::AddGroundPlane(200.0f, Colors::White);
 	SimpleDraw::Render(mCamera);
 
 	ImGui::Begin("Debug", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
