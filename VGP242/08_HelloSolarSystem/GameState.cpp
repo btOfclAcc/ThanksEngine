@@ -16,9 +16,10 @@ using namespace ThanksEngine::Input;
 
 void GameState::Initialize()
 {
-	time = 0.0f;
+	mDeltaTime = 0.0f;
+	mTime = 0.0f;
 
-	mCamera.SetPosition({ 0.0f, 1.0f, -3.0f });
+	mCamera.SetPosition({ 0.0f, 5.0f, -15.0f });
 	mCamera.SetLookAt({ 0.0f, 0.0f, 0.0f });
 
 	mRenderTargetCamera.SetPosition({ 0.0f, 1.0f, -3.0f });
@@ -50,7 +51,7 @@ void GameState::Initialize()
 		mSun.mOrbitPeriod = 0.0f;
 
 		mSun.mRotationSpeed = 1 / -27.0f;
-		mSun.mTilt = 7.25f;
+		mSun.mTilt = 7.25f / 180.0f * Math::Constants::Pi;
 		mSun.mDistanceFromSun = (ToScale) ? 0.0f : 0.0f;
 		mSun.mOrbitSpeed = 0.0f;
 	}
@@ -72,7 +73,7 @@ void GameState::Initialize()
 		mMercury.mOrbitPeriod = 87.97f;
 
 		mMercury.mRotationSpeed = 1 / -58.6f;
-		mMercury.mTilt = 0.034f;
+		mMercury.mTilt = 0.034f / 180.0f * Math::Constants::Pi;
 		mMercury.mDistanceFromSun = (ToScale) ? 9089.0f : 10.0f;
 		mMercury.mOrbitSpeed = 1 / 87.97f;
 	}
@@ -94,8 +95,8 @@ void GameState::Initialize()
 		mVenus.mOrbitPeriod = 224.55f;
 
 		mVenus.mRotationSpeed = 1 / 243.0f;
-		mVenus.mTilt = 177.4f;
-		mVenus.mDistanceFromSun = (ToScale) ? 16989.0f : 7.0f;
+		mVenus.mTilt = 177.4f / 180.0f * Math::Constants::Pi;
+		mVenus.mDistanceFromSun = (ToScale) ? 16989.0f : 15.0f;
 		mVenus.mOrbitSpeed = 1 / 224.55f;
 	}
 
@@ -116,7 +117,7 @@ void GameState::Initialize()
 		mEarth.mOrbitPeriod = 365.01f;
 
 		mEarth.mRotationSpeed = 1 / -1.0f;
-		mEarth.mTilt = 23.4f;
+		mEarth.mTilt = 23.4f / 180.0f * Math::Constants::Pi;
 		mEarth.mDistanceFromSun = (ToScale) ? 23483.0f : 20.0f;
 		mEarth.mOrbitSpeed = 1 / 365.01f;
 	}
@@ -138,7 +139,7 @@ void GameState::Initialize()
 		mMars.mOrbitPeriod = 686.98f;
 
 		mMars.mRotationSpeed = 1 / -1.0f;
-		mMars.mTilt = 25.2f;
+		mMars.mTilt = 25.2f / 180.0f * Math::Constants::Pi;
 		mMars.mDistanceFromSun = (ToScale) ? 35772.0f : 24.0f;
 		mMars.mOrbitSpeed = 1 / 686.98f;
 	}
@@ -160,7 +161,7 @@ void GameState::Initialize()
 		mJupiter.mOrbitPeriod = 4332.82f;
 
 		mJupiter.mRotationSpeed = 1 / -0.41f;
-		mJupiter.mTilt = 3.1f;
+		mJupiter.mTilt = 3.1f / 180.0f * Math::Constants::Pi;
 		mJupiter.mDistanceFromSun = (ToScale) ? 122174.0f : 40.0f;
 		mJupiter.mOrbitSpeed = 1 / 4332.82f;
 	}
@@ -182,7 +183,7 @@ void GameState::Initialize()
 		mSaturn.mOrbitPeriod = 10759.22f;
 
 		mSaturn.mRotationSpeed = 1 / -0.45f;
-		mSaturn.mTilt = 26.7f;
+		mSaturn.mTilt = 26.7f / 180.0f * Math::Constants::Pi;
 		mSaturn.mDistanceFromSun = (ToScale) ? 223867.0f : 50.0f;
 		mSaturn.mOrbitSpeed = 1 / 10759.22f;
 	}
@@ -204,7 +205,7 @@ void GameState::Initialize()
 		mUranus.mOrbitPeriod = 30685.0f;
 
 		mUranus.mRotationSpeed = 1 / 0.72f;
-		mUranus.mTilt = 97.8f;
+		mUranus.mTilt = 97.8f / 180.0f * Math::Constants::Pi;
 		mUranus.mDistanceFromSun = (ToScale) ? 450409.0f : 60.0f;
 		mUranus.mOrbitSpeed = 1 / 30685.0f;
 	}
@@ -226,7 +227,7 @@ void GameState::Initialize()
 		mNeptune.mOrbitPeriod = 60190.03f;
 
 		mNeptune.mRotationSpeed = 1 / -0.67f;
-		mNeptune.mTilt = 28.3f;
+		mNeptune.mTilt = 28.3f / 180.0f * Math::Constants::Pi;
 		mNeptune.mDistanceFromSun = (ToScale) ? 705693.0f : 66.0f;
 		mNeptune.mOrbitSpeed = 1 / 60190.03f;
 	}
@@ -248,7 +249,7 @@ void GameState::Initialize()
 		mPluto.mOrbitPeriod = 90560.0f;
 
 		mPluto.mRotationSpeed = 1 / -6.39f;
-		mPluto.mTilt = 122.5f;
+		mPluto.mTilt = 122.5f / 180.0f * Math::Constants::Pi;
 		mPluto.mDistanceFromSun = (ToScale) ? 926610.0f : 72.0f;
 		mPluto.mOrbitSpeed = 1 / 90560.0f;
 	}
@@ -299,7 +300,7 @@ void GameState::Terminate()
 void GameState::Update(float deltaTime)
 {
 	UpdateCamera(deltaTime);
-	time += deltaTime;
+	mDeltaTime = deltaTime;
 }
 
 void GameState::UpdateCamera(float deltaTime)
@@ -351,13 +352,19 @@ void GameState::Render()
 	mConstantBuffer.Update(&wvp);
 	mConstantBuffer.BindVS(0);
 
+	// Sun & Planets
 	for (auto renderItem : renderItems)
 	{
+		renderItem->mRotation += Math::Constants::Pi* renderItem->mRotationSpeed* mDeltaTime;
+		renderItem->mOrbit += Math::Constants::Pi* renderItem->mOrbitSpeed* mDeltaTime;
+
 		matWorld = Matrix4::Identity;
 		matWorld = 
-			Matrix4::RotationY(Math::Constants::Pi * renderItem->mRotationSpeed * time) * 
+			Matrix4::RotationY(renderItem->mRotation) *
+			Matrix4::RotationX(renderItem->mTilt) *
+			Matrix4::RotationY(-renderItem->mOrbit) * 
 			Matrix4::Translation({ 0.0f, 0.0f, renderItem->mDistanceFromSun / reducer}) * 
-			Matrix4::RotationY(Math::Constants::Pi * renderItem->mOrbitSpeed * time);
+			Matrix4::RotationY(renderItem->mOrbit);
 		matFinal = matWorld * matView * matProj;
 		wvp = Transpose(matFinal);
 		mConstantBuffer.Update(&wvp);
@@ -365,6 +372,7 @@ void GameState::Render()
 		renderItem->Render();
 	}
 
+	// Sky Sphere
 	matWorld = Matrix4::Identity;
 	matView = mCamera.GetViewMatrix();
 	matProj = mCamera.GetProjectionMatrix();
@@ -383,6 +391,15 @@ void GameState::Render()
 	mConstantBuffer.BindVS(0);
 
 	mRenderTarget.BeginRender();
+
+	mMercury.mVertexShader.Bind();
+	mMercury.mPixelShader.Bind();
+
+	mMercury.mDiffuseTexture.BindPS(0);
+	mMercury.mSampler.BindPS(0);
+
+	mMercury.mMeshBuffer.Render();
+	/*
 	switch (target)
 	{
 		case 0: // Sun
@@ -428,18 +445,146 @@ void GameState::Render()
 		default:
 			break;
 	}
+	*/
 	mRenderTarget.EndRender();
 }
 
-bool buttonValye = false;
-int intValue = 0;
 void GameState::DebugUI()
 {
-	SimpleDraw::AddGroundPlane(200.0f, Colors::White);
-	SimpleDraw::Render(mCamera);
+	ImGui::Begin("Controls", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
-	ImGui::Begin("Debug", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-	ImGui::Text("Just Some Test Text");
+	ImGui::Text("World");
+
+	ImGui::Checkbox("Show Grid", &mShowGrid);
+	if (mShowGrid)
+	{
+		SimpleDraw::AddGroundPlane(500.0f, Colors::White);
+	}
+
+	// Sun
+	if (ImGui::CollapsingHeader("Sun"))
+	{
+		ImGui::DragFloat("Rotation Speed", &mSun.mRotationSpeed, 0.01f);
+	}
+
+	// Mercury
+	if (ImGui::CollapsingHeader("Mercury"))
+	{
+		ImGui::Checkbox("Show Orbit##Mercury", &mMercury.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Mercury", &mMercury.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Mercury", &mMercury.mOrbitSpeed, 0.01f);
+	}
+	if (mMercury.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mMercury.mDistanceFromSun, Colors::White);
+	}
+
+	// Venus
+	if (ImGui::CollapsingHeader("Venus"))
+	{
+		ImGui::Checkbox("Show Orbit##Venus", &mVenus.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Venus", &mVenus.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Venus", &mVenus.mOrbitSpeed, 0.01f);
+	}
+	if (mVenus.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mVenus.mDistanceFromSun, Colors::White);
+	}
+
+	// Earth
+	if (ImGui::CollapsingHeader("Earth"))
+	{
+		ImGui::Checkbox("Show Orbit##Earth", &mEarth.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Earth", &mEarth.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Earth", &mEarth.mOrbitSpeed, 0.01f);
+	}
+	if (mEarth.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mEarth.mDistanceFromSun, Colors::White);
+	}
+
+	// Mars
+	if (ImGui::CollapsingHeader("Mars"))
+	{
+		ImGui::Checkbox("Show Orbit##Mars", &mMars.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Mars", &mMars.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Mars", &mMars.mOrbitSpeed, 0.01f);
+	}
+	if (mMars.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mMars.mDistanceFromSun, Colors::White);
+	}
+
+	// Jupiter
+	if (ImGui::CollapsingHeader("Jupiter"))
+	{
+		ImGui::Checkbox("Show Orbit##Jupiter", &mJupiter.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Jupiter", &mJupiter.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Jupiter", &mJupiter.mOrbitSpeed, 0.01f);
+	}
+	if (mJupiter.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mJupiter.mDistanceFromSun, Colors::White);
+	}
+
+	// Saturn
+	if (ImGui::CollapsingHeader("Saturn"))
+	{
+		ImGui::Checkbox("Show Orbit##Saturn", &mSaturn.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Saturn", &mSaturn.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Saturn", &mSaturn.mOrbitSpeed, 0.01f);
+	}
+	if (mSaturn.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mSaturn.mDistanceFromSun, Colors::White);
+	}
+
+	// Uranus
+	if (ImGui::CollapsingHeader("Uranus"))
+	{
+		ImGui::Checkbox("Show Orbit##Uranus", &mUranus.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Uranus", &mUranus.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Uranus", &mUranus.mOrbitSpeed, 0.01f);
+	}
+	if (mUranus.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mUranus.mDistanceFromSun, Colors::White);
+	}
+
+	// Neptune
+	if (ImGui::CollapsingHeader("Neptune"))
+	{
+		ImGui::Checkbox("Show Orbit##Neptune", &mNeptune.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Neptune", &mNeptune.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Neptune", &mNeptune.mOrbitSpeed, 0.01f);
+	}
+	if (mNeptune.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mNeptune.mDistanceFromSun, Colors::White);
+	}
+
+	// Pluto
+	if (ImGui::CollapsingHeader("Pluto"))
+	{
+		ImGui::Checkbox("Show Orbit##Pluto", &mPluto.mShowOrbit);
+
+		ImGui::DragFloat("Rotation Speed##Pluto", &mPluto.mRotationSpeed, 0.01f);
+		ImGui::DragFloat("Orbit Speed##Pluto", &mPluto.mOrbitSpeed, 0.01f);
+	}
+	if (mPluto.mShowOrbit)
+	{
+		SimpleDraw::AddGroundCircle(60, mPluto.mDistanceFromSun, Colors::White);
+	}
+
+	SimpleDraw::Render(mCamera);
 	ImGui::End();
 
 	ImGui::Begin("Target Render", nullptr, ImGuiWindowFlags_AlwaysAutoResize);

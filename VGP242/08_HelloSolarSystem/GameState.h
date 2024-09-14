@@ -6,6 +6,8 @@
 class RenderItem
 {
 public:
+	std::string mName;
+
 	float mRotationPeriod;
 	float mOrbitPeriod;
 
@@ -13,6 +15,11 @@ public:
 	float mTilt;
 	float mDistanceFromSun;
 	float mOrbitSpeed;
+
+	float mRotation;
+	float mOrbit;
+
+	bool mShowOrbit = true;
 
 	ThanksEngine::Graphics::MeshBuffer mMeshBuffer;
 	ThanksEngine::Graphics::VertexShader mVertexShader;
@@ -53,7 +60,9 @@ public:
 protected:
 	void UpdateCamera(float deltaTime);
 
-	float time;
+	float mDeltaTime;
+	float mTime;
+	bool mShowGrid = false;
 
 	ThanksEngine::Graphics::Camera mCamera;
 	ThanksEngine::Graphics::Camera mRenderTargetCamera;
