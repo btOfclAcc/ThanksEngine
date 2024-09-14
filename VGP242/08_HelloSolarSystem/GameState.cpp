@@ -31,21 +31,21 @@ void GameState::Initialize()
 
 	mConstantBuffer.Initialize(sizeof(Matrix4));
 
+	std::filesystem::path shaderFile = L"../../Assets/Shaders/DoTexture.fx";
+	mVertexShader.Initialize<VertexPX>(shaderFile);
+	mPixelShader.Initialize(shaderFile);
+
+	mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
+
 	MeshPX mesh;
-	std::filesystem::path shaderFile;
 
 	// Sun
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 109.0f : 3.0f);
+		mSun.mRadius = (ToScale) ? 109.0f : 3.0f;
 
 		mSun.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mSun.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mSun.mPixelShader.Initialize(shaderFile);
-
 		mSun.mDiffuseTexture.Initialize("../../Assets/Images/planets/sun.jpg");
-		mSun.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mSun.mRotationPeriod = -27.0f;
 		mSun.mOrbitPeriod = 0.0f;
@@ -59,15 +59,10 @@ void GameState::Initialize()
 	// Mercury
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.383f : 0.5f);
+		mMercury.mRadius = (ToScale) ? 0.383f : 0.5f;
 
 		mMercury.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mMercury.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mMercury.mPixelShader.Initialize(shaderFile);
-
 		mMercury.mDiffuseTexture.Initialize("../../Assets/Images/planets/mercury.jpg");
-		mMercury.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mMercury.mRotationPeriod = -58.6f;
 		mMercury.mOrbitPeriod = 87.97f;
@@ -81,15 +76,10 @@ void GameState::Initialize()
 	// Venus
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.949f : 1.0f);
+		mVenus.mRadius = (ToScale) ? 0.949f : 1.0f;
 
 		mVenus.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mVenus.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mVenus.mPixelShader.Initialize(shaderFile);
-
 		mVenus.mDiffuseTexture.Initialize("../../Assets/Images/planets/venus.jpg");
-		mVenus.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mVenus.mRotationPeriod = 243.0f;
 		mVenus.mOrbitPeriod = 224.55f;
@@ -103,15 +93,10 @@ void GameState::Initialize()
 	// Earth
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 1.0f : 1.0f);
+		mEarth.mRadius = (ToScale) ? 1.0f : 1.0f;
 
 		mEarth.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mEarth.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mEarth.mPixelShader.Initialize(shaderFile);
-
 		mEarth.mDiffuseTexture.Initialize("../../Assets/Images/planets/earth/earth.jpg");
-		mEarth.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mEarth.mRotationPeriod = -1.0f;
 		mEarth.mOrbitPeriod = 365.01f;
@@ -125,15 +110,10 @@ void GameState::Initialize()
 	// Mars
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.532f : 0.5f);
+		mMars.mRadius = (ToScale) ? 0.532f : 0.5f;
 
 		mMars.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mMars.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mMars.mPixelShader.Initialize(shaderFile);
-
 		mMars.mDiffuseTexture.Initialize("../../Assets/Images/planets/mars.jpg");
-		mMars.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mMars.mRotationPeriod = -1.0f;
 		mMars.mOrbitPeriod = 686.98f;
@@ -147,15 +127,10 @@ void GameState::Initialize()
 	// Jupiter
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 11.21f : 2.0f);
+		mJupiter.mRadius = (ToScale) ? 11.21f : 2.0f;
 
 		mJupiter.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mJupiter.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mJupiter.mPixelShader.Initialize(shaderFile);
-
 		mJupiter.mDiffuseTexture.Initialize("../../Assets/Images/planets/jupiter.jpg");
-		mJupiter.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mJupiter.mRotationPeriod = -0.41f;
 		mJupiter.mOrbitPeriod = 4332.82f;
@@ -169,15 +144,10 @@ void GameState::Initialize()
 	// Saturn
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 9.45f : 2.0f);
+		mSaturn.mRadius = (ToScale) ? 9.45f : 2.0f;
 
 		mSaturn.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mSaturn.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mSaturn.mPixelShader.Initialize(shaderFile);
-
 		mSaturn.mDiffuseTexture.Initialize("../../Assets/Images/planets/saturn.jpg");
-		mSaturn.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mSaturn.mRotationPeriod = -0.45f;
 		mSaturn.mOrbitPeriod = 10759.22f;
@@ -191,15 +161,10 @@ void GameState::Initialize()
 	// Uranus
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 4.01f : 1.5f);
+		mUranus.mRadius = (ToScale) ? 4.01f : 1.5f;
 
 		mUranus.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mUranus.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mUranus.mPixelShader.Initialize(shaderFile);
-
 		mUranus.mDiffuseTexture.Initialize("../../Assets/Images/planets/uranus.jpg");
-		mUranus.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mUranus.mRotationPeriod = 0.72f;
 		mUranus.mOrbitPeriod = 30685.0f;
@@ -213,15 +178,10 @@ void GameState::Initialize()
 	// Neptune
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 3.88f : 1.5f);
+		mNeptune.mRadius = (ToScale) ? 3.88f : 1.5f;
 
 		mNeptune.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mNeptune.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mNeptune.mPixelShader.Initialize(shaderFile);
-
 		mNeptune.mDiffuseTexture.Initialize("../../Assets/Images/planets/neptune.jpg");
-		mNeptune.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mNeptune.mRotationPeriod = -0.67f;
 		mNeptune.mOrbitPeriod = 60190.03f;
@@ -235,15 +195,10 @@ void GameState::Initialize()
 	// Pluto
 	{
 		mesh = MeshBuilder::CreateSpherePX(60, 60, (ToScale) ? 0.186f : 0.25f);
+		mPluto.mRadius = (ToScale) ? 0.186f : 0.25f;
 
 		mPluto.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mPluto.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mPluto.mPixelShader.Initialize(shaderFile);
-
 		mPluto.mDiffuseTexture.Initialize("../../Assets/Images/planets/pluto.jpg");
-		mPluto.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 
 		mPluto.mRotationPeriod = -6.39f;
 		mPluto.mOrbitPeriod = 90560.0f;
@@ -269,13 +224,7 @@ void GameState::Initialize()
 		mesh = MeshBuilder::CreateSkySpherePX(60, 60, mPluto.mDistanceFromSun * 2);
 
 		mSkySphere.mMeshBuffer.Initialize<MeshPX>(mesh);
-
-		shaderFile = L"../../Assets/Shaders/DoTexture.fx";
-		mSkySphere.mVertexShader.Initialize<VertexPX>(shaderFile);
-		mSkySphere.mPixelShader.Initialize(shaderFile);
-
 		mSkySphere.mDiffuseTexture.Initialize("../../Assets/Images/skysphere/space.jpg");
-		mSkySphere.mSampler.Initialize(Sampler::Filter::Linear, Sampler::AddressMode::Wrap);
 	}
 }
 
@@ -292,6 +241,10 @@ void GameState::Terminate()
 	mVenus.Terminate();
 	mMercury.Terminate();
 	mSun.Terminate();
+
+	mSampler.Terminate();
+	mPixelShader.Terminate();
+	mVertexShader.Terminate();
 
 	mConstantBuffer.Terminate();
 	mRenderTarget.Terminate();
@@ -339,10 +292,12 @@ void GameState::UpdateCamera(float deltaTime)
 	}
 }
 
-int target = 0;
-
 void GameState::Render()
 {
+	mVertexShader.Bind();
+	mPixelShader.Bind();
+	mSampler.BindPS(0);
+
 	// Constant Buffer
 	Matrix4 matWorld = Matrix4::Identity;
 	Matrix4 matView = mCamera.GetViewMatrix();
@@ -381,8 +336,14 @@ void GameState::Render()
 	mConstantBuffer.Update(&wvp);
 	mConstantBuffer.BindVS(0);
 	mSkySphere.Render();
-	
-	matWorld = Matrix4::Identity;
+
+	// Render Target
+	if (mTarget < 1 || mTarget > 9) mTarget = 0;
+	mRenderTargetCamera.SetPosition({ 0.0f, 0.0f, -renderItems[mTarget]->mRadius * 2 });
+	mRenderTargetCamera.SetLookAt({ 0.0f, 0.0f, 0.0f });
+	matWorld =
+		Matrix4::RotationY(renderItems[mTarget]->mRotation) *
+		Matrix4::RotationX(renderItems[mTarget]->mTilt);
 	matView = mRenderTargetCamera.GetViewMatrix();
 	matProj = mRenderTargetCamera.GetProjectionMatrix();
 	matFinal = matWorld * matView * matProj;
@@ -391,61 +352,16 @@ void GameState::Render()
 	mConstantBuffer.BindVS(0);
 
 	mRenderTarget.BeginRender();
-
-	mMercury.mVertexShader.Bind();
-	mMercury.mPixelShader.Bind();
-
-	mMercury.mDiffuseTexture.BindPS(0);
-	mMercury.mSampler.BindPS(0);
-
-	mMercury.mMeshBuffer.Render();
-	/*
-	switch (target)
-	{
-		case 0: // Sun
-			mSun.Render();
-			break;
-		
-		case 1: // Mercury
-			mMercury.Render();
-			break;
-
-		case 2: // Venus
-			mVenus.Render();
-			break;
-
-		case 3: // Earth
-			mEarth.Render();
-			break;
-
-		case 4: // Mars
-			mMars.Render();
-			break;
-
-		case 5: // Jupiter
-			mJupiter.Render();
-			break;
-
-		case 6: // Saturn
-			mSaturn.Render();
-			break;
-
-		case 7: // Uranus
-			mUranus.Render();
-			break;
-
-		case 8: // Neptune
-			mNeptune.Render();
-			break;
-
-		case 9: // Pluto
-			mPluto.Render();
-			break;
-
-		default:
-			break;
-	}
-	*/
+	if (mTarget == 0)		mSun.Render();
+	else if (mTarget == 1)	mMercury.Render();
+	else if (mTarget == 2)	mVenus.Render();
+	else if (mTarget == 3)	mEarth.Render();
+	else if (mTarget == 4)	mMars.Render();
+	else if (mTarget == 5)	mJupiter.Render();
+	else if (mTarget == 6)	mSaturn.Render();
+	else if (mTarget == 7)	mUranus.Render();
+	else if (mTarget == 8)	mNeptune.Render();
+	else if (mTarget == 9)	mPluto.Render();
 	mRenderTarget.EndRender();
 }
 
@@ -590,22 +506,9 @@ void GameState::DebugUI()
 	ImGui::Begin("Target Render", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
 
 	const char* items[] = { "Sun", "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto" };
-	static const char* current_item = NULL;
-
-	if (ImGui::BeginCombo("##combo", current_item)) // The second parameter is the label previewed before opening the combo.
-	{
-		for (int n = 0; n < IM_ARRAYSIZE(items); n++)
-		{
-			bool is_selected = (current_item == items[n]); // You can store your selection however you want, outside or inside your objects
-			if (ImGui::Selectable(items[n], is_selected))
-				current_item = items[n];
-				target = n;
-				if (is_selected)
-					ImGui::SetItemDefaultFocus();   // You may set the initial focus when opening the combo (scrolling + for keyboard navigation support)
-		}
-		ImGui::EndCombo();
-	}
-
+	
+	ImGui::Combo("Target", &mTarget, items, static_cast<int>(std::size(items)));
+	
 	ImGui::Image(
 		mRenderTarget.GetRawData(),
 		{ 256, 256 },

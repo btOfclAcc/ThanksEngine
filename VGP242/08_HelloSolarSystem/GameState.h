@@ -19,31 +19,22 @@ public:
 	float mRotation;
 	float mOrbit;
 
+	float mRadius;
+
 	bool mShowOrbit = true;
 
 	ThanksEngine::Graphics::MeshBuffer mMeshBuffer;
-	ThanksEngine::Graphics::VertexShader mVertexShader;
-	ThanksEngine::Graphics::PixelShader mPixelShader;
 	ThanksEngine::Graphics::Texture mDiffuseTexture;
-	ThanksEngine::Graphics::Sampler mSampler;
 
 	void Terminate()
 	{
-		mSampler.Terminate();
 		mDiffuseTexture.Terminate();
-		mPixelShader.Terminate();
 		mMeshBuffer.Terminate();
-		mVertexShader.Terminate();
 	}
 
 	void Render()
 	{
-		mVertexShader.Bind();
-		mPixelShader.Bind();
-
 		mDiffuseTexture.BindPS(0);
-		mSampler.BindPS(0);
-
 		mMeshBuffer.Render();
 	}
 };
@@ -63,11 +54,16 @@ protected:
 	float mDeltaTime;
 	float mTime;
 	bool mShowGrid = false;
+	int mTarget = 0;
 
 	ThanksEngine::Graphics::Camera mCamera;
 	ThanksEngine::Graphics::Camera mRenderTargetCamera;
 	ThanksEngine::Graphics::ConstantBuffer mConstantBuffer;
 	ThanksEngine::Graphics::RenderTarget mRenderTarget;
+
+	ThanksEngine::Graphics::VertexShader mVertexShader;
+	ThanksEngine::Graphics::PixelShader mPixelShader;
+	ThanksEngine::Graphics::Sampler mSampler;
 
 	std::vector<RenderItem*> renderItems;
 
