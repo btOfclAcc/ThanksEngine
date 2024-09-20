@@ -1,6 +1,6 @@
 #include "GameState.h"
 
-#define ToScale FALSE
+#define ToScale TRUE
 
 #if ToScale
 #define reducer 50.0f
@@ -20,7 +20,14 @@ void GameState::Initialize()
 	mTime = 0.0f;
 	mTimeRate = 1;
 
-	mCamera.SetPosition({ 0.0f, 5.0f, -15.0f });
+	if (ToScale)
+	{
+		mCamera.SetPosition({ 0.0f, 100.0f, -300.0f });
+	}
+	else
+	{
+		mCamera.SetPosition({ 0.0f, 5.0f, -15.0f });
+	}
 	mCamera.SetLookAt({ 0.0f, 0.0f, 0.0f });
 
 	mRenderTargetCamera.SetPosition({ 0.0f, 1.0f, -3.0f });
@@ -54,6 +61,7 @@ void GameState::Initialize()
 		mSun.mRotationSpeed = 1 / -27.0f;
 		mSun.mTilt = 7.25f / 180.0f * Math::Constants::Pi;
 		mSun.mDistanceFromSun = (ToScale) ? 0.0f : 0.0f;
+		mSun.mDistanceFromSun /= reducer;
 		mSun.mOrbitSpeed = 0.0f;
 	}
 
@@ -71,6 +79,7 @@ void GameState::Initialize()
 		mMercury.mRotationSpeed = 1 / -58.6f;
 		mMercury.mTilt = 0.034f / 180.0f * Math::Constants::Pi;
 		mMercury.mDistanceFromSun = (ToScale) ? 9089.0f : 10.0f;
+		mMercury.mDistanceFromSun /= reducer;
 		mMercury.mOrbitSpeed = 1 / 87.97f;
 	}
 
@@ -88,6 +97,7 @@ void GameState::Initialize()
 		mVenus.mRotationSpeed = 1 / 243.0f;
 		mVenus.mTilt = 177.4f / 180.0f * Math::Constants::Pi;
 		mVenus.mDistanceFromSun = (ToScale) ? 16989.0f : 15.0f;
+		mVenus.mDistanceFromSun /= reducer;
 		mVenus.mOrbitSpeed = 1 / 224.55f;
 	}
 
@@ -105,6 +115,7 @@ void GameState::Initialize()
 		mEarth.mRotationSpeed = 1 / -1.0f;
 		mEarth.mTilt = 23.4f / 180.0f * Math::Constants::Pi;
 		mEarth.mDistanceFromSun = (ToScale) ? 23483.0f : 20.0f;
+		mEarth.mDistanceFromSun /= reducer;
 		mEarth.mOrbitSpeed = 1 / 365.01f;
 	}
 
@@ -122,6 +133,7 @@ void GameState::Initialize()
 		mMars.mRotationSpeed = 1 / -1.0f;
 		mMars.mTilt = 25.2f / 180.0f * Math::Constants::Pi;
 		mMars.mDistanceFromSun = (ToScale) ? 35772.0f : 24.0f;
+		mMars.mDistanceFromSun /= reducer;
 		mMars.mOrbitSpeed = 1 / 686.98f;
 	}
 
@@ -139,6 +151,7 @@ void GameState::Initialize()
 		mJupiter.mRotationSpeed = 1 / -0.41f;
 		mJupiter.mTilt = 3.1f / 180.0f * Math::Constants::Pi;
 		mJupiter.mDistanceFromSun = (ToScale) ? 122174.0f : 40.0f;
+		mJupiter.mDistanceFromSun /= reducer;
 		mJupiter.mOrbitSpeed = 1 / 4332.82f;
 	}
 
@@ -156,6 +169,7 @@ void GameState::Initialize()
 		mSaturn.mRotationSpeed = 1 / -0.45f;
 		mSaturn.mTilt = 26.7f / 180.0f * Math::Constants::Pi;
 		mSaturn.mDistanceFromSun = (ToScale) ? 223867.0f : 50.0f;
+		mSaturn.mDistanceFromSun /= reducer;
 		mSaturn.mOrbitSpeed = 1 / 10759.22f;
 	}
 
@@ -173,6 +187,7 @@ void GameState::Initialize()
 		mUranus.mRotationSpeed = 1 / 0.72f;
 		mUranus.mTilt = 97.8f / 180.0f * Math::Constants::Pi;
 		mUranus.mDistanceFromSun = (ToScale) ? 450409.0f : 60.0f;
+		mUranus.mDistanceFromSun /= reducer;
 		mUranus.mOrbitSpeed = 1 / 30685.0f;
 	}
 
@@ -190,6 +205,7 @@ void GameState::Initialize()
 		mNeptune.mRotationSpeed = 1 / -0.67f;
 		mNeptune.mTilt = 28.3f / 180.0f * Math::Constants::Pi;
 		mNeptune.mDistanceFromSun = (ToScale) ? 705693.0f : 66.0f;
+		mNeptune.mDistanceFromSun /= reducer;
 		mNeptune.mOrbitSpeed = 1 / 60190.03f;
 	}
 
@@ -207,6 +223,7 @@ void GameState::Initialize()
 		mPluto.mRotationSpeed = 1 / -6.39f;
 		mPluto.mTilt = 122.5f / 180.0f * Math::Constants::Pi;
 		mPluto.mDistanceFromSun = (ToScale) ? 926610.0f : 72.0f;
+		mPluto.mDistanceFromSun /= reducer;
 		mPluto.mOrbitSpeed = 1 / 90560.0f;
 	}
 
@@ -221,6 +238,7 @@ void GameState::Initialize()
 	renderItems.push_back(&mNeptune);
 	renderItems.push_back(&mPluto);
 
+	// Sky Sphere
 	{
 		mesh = MeshBuilder::CreateSkySpherePX(60, 60, mPluto.mDistanceFromSun * 2);
 
@@ -260,7 +278,7 @@ void GameState::Update(float deltaTime)
 void GameState::UpdateCamera(float deltaTime)
 {
 	auto input = InputSystem::Get();
-	const float moveSpeed = (input->IsKeyDown(KeyCode::LSHIFT) ? 10.0f : 1.0f) * deltaTime;
+	const float moveSpeed = (input->IsKeyDown(KeyCode::LSHIFT) ? 10.0f : 1.0f) * deltaTime * (ToScale) ? 10.0f : 1.0f;
 	const float turnSpeed = 0.1f * deltaTime;
 	if (input->IsKeyDown(KeyCode::W))
 	{
@@ -308,7 +326,7 @@ void GameState::Render()
 	mConstantBuffer.Update(&wvp);
 	mConstantBuffer.BindVS(0);
 
-	// Sun & Planets
+	// Sun & Planets & Drawf Planet
 	for (auto renderItem : renderItems)
 	{
 		renderItem->mRotation += Math::Constants::Pi* renderItem->mRotationSpeed* mDeltaTime;
@@ -318,7 +336,7 @@ void GameState::Render()
 		matWorld = 
 			Matrix4::RotationY(renderItem->mRotation) *
 			Matrix4::RotationX(-renderItem->mTilt) *
-			Matrix4::Translation({ 0.0f, 0.0f, renderItem->mDistanceFromSun / reducer}) * 
+			Matrix4::Translation({ 0.0f, 0.0f, renderItem->mDistanceFromSun}) * 
 			Matrix4::RotationY(renderItem->mOrbit);
 		matFinal = matWorld * matView * matProj;
 		wvp = Transpose(matFinal);
@@ -378,7 +396,7 @@ void GameState::DebugUI()
 		SimpleDraw::AddGroundPlane(500.0f, Colors::White);
 	}
 
-	ImGui::DragInt("Time Rate", &mTimeRate, 0.1f, 0.0f, 100.0f);
+	ImGui::DragInt("Time Rate (Days Per Second)", &mTimeRate, 0.1f, 0.0f, 100.0f);
 
 	// Sun
 	if (ImGui::CollapsingHeader("Sun"))
