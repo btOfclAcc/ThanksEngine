@@ -18,6 +18,7 @@ void GameState::Initialize()
 {
 	mDeltaTime = 0.0f;
 	mTime = 0.0f;
+	mTimeRate = 1;
 
 	mCamera.SetPosition({ 0.0f, 5.0f, -15.0f });
 	mCamera.SetLookAt({ 0.0f, 0.0f, 0.0f });
@@ -253,7 +254,7 @@ void GameState::Terminate()
 void GameState::Update(float deltaTime)
 {
 	UpdateCamera(deltaTime);
-	mDeltaTime = deltaTime;
+	mDeltaTime = deltaTime * mTimeRate;
 }
 
 void GameState::UpdateCamera(float deltaTime)
@@ -316,8 +317,7 @@ void GameState::Render()
 		matWorld = Matrix4::Identity;
 		matWorld = 
 			Matrix4::RotationY(renderItem->mRotation) *
-			Matrix4::RotationX(renderItem->mTilt) *
-			Matrix4::RotationY(-renderItem->mOrbit) * 
+			Matrix4::RotationX(-renderItem->mTilt) *
 			Matrix4::Translation({ 0.0f, 0.0f, renderItem->mDistanceFromSun / reducer}) * 
 			Matrix4::RotationY(renderItem->mOrbit);
 		matFinal = matWorld * matView * matProj;
@@ -343,7 +343,8 @@ void GameState::Render()
 	mRenderTargetCamera.SetLookAt({ 0.0f, 0.0f, 0.0f });
 	matWorld =
 		Matrix4::RotationY(renderItems[mTarget]->mRotation) *
-		Matrix4::RotationX(renderItems[mTarget]->mTilt);
+		Matrix4::RotationX(-renderItems[mTarget]->mTilt) *
+		Matrix4::RotationY(-renderItems[mTarget]->mOrbit);
 	matView = mRenderTargetCamera.GetViewMatrix();
 	matProj = mRenderTargetCamera.GetProjectionMatrix();
 	matFinal = matWorld * matView * matProj;
@@ -376,6 +377,8 @@ void GameState::DebugUI()
 	{
 		SimpleDraw::AddGroundPlane(500.0f, Colors::White);
 	}
+
+	ImGui::DragInt("Time Rate", &mTimeRate, 0.1f, 0.0f, 100.0f);
 
 	// Sun
 	if (ImGui::CollapsingHeader("Sun"))

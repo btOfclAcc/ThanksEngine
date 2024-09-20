@@ -53,6 +53,7 @@ protected:
 
 	float mDeltaTime;
 	float mTime;
+	int mTimeRate;
 	bool mShowGrid = false;
 	int mTarget = 0;
 
