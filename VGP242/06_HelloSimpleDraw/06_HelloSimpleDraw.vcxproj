@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{319954ca-5322-4f07-a5b7-84db2ce78ce3}</ProjectGuid>
+    <ProjectGuid>{E85FCD64-57F4-4BA1-89EE-C6008725D926}</ProjectGuid>
     <RootNamespace>My06HelloSimpleDraw</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

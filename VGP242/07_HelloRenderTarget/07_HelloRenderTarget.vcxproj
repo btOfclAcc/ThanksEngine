@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bbef02de-c282-4781-8a99-e28c17d543ab}</ProjectGuid>
+    <ProjectGuid>{DD26BFC6-25E2-4FB5-839E-612E12F56A4A}</ProjectGuid>
     <RootNamespace>My07HelloRenderTarget</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

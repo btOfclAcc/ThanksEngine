@@ -11,6 +11,7 @@ namespace ThanksEngine
 		uint32_t winHeight = 720;
 		uint32_t maxDrawLines = 100000;
 	};
+
 	class App final
 	{
 	public:
@@ -30,7 +31,7 @@ namespace ThanksEngine
 				ptr = std::make_unique<StateType>();
 				if (mCurrentState == nullptr)
 				{
-					LOG("App: Current state %s", stateName.c_str());;
+					LOG("App: Current state %s", stateName.c_str());
 					mCurrentState = ptr.get();
 				}
 			}

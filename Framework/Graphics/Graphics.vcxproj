@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{deb72ec1-7778-4da0-b9fa-09e9a9730a88}</ProjectGuid>
+    <ProjectGuid>{4ed2e746-1d15-4c41-8e77-c6487f43b778}</ProjectGuid>
     <RootNamespace>Graphics</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -141,16 +141,26 @@
     <ClInclude Include="Inc\Common.h" />
     <ClInclude Include="Inc\ConstantBuffer.h" />
     <ClInclude Include="Inc\DebugUI.h" />
+    <ClInclude Include="Inc\DirectionalLight.h" />
     <ClInclude Include="Inc\Graphics.h" />
     <ClInclude Include="Inc\GraphicsSystem.h" />
+    <ClInclude Include="Inc\Material.h" />
     <ClInclude Include="Inc\MeshBuffer.h" />
     <ClInclude Include="Inc\MeshBuilder.h" />
     <ClInclude Include="Inc\MeshTypes.h" />
+    <ClInclude Include="Inc\Model.h" />
+    <ClInclude Include="Inc\ModelCache.h" />
+    <ClInclude Include="Inc\ModelIO.h" />
     <ClInclude Include="Inc\PixelShader.h" />
+    <ClInclude Include="Inc\PostProcessingEffect.h" />
+    <ClInclude Include="Inc\RenderObject.h" />
     <ClInclude Include="Inc\RenderTarget.h" />
     <ClInclude Include="Inc\Sampler.h" />
     <ClInclude Include="Inc\SimpleDraw.h" />
+    <ClInclude Include="Inc\StandardEffect.h" />
     <ClInclude Include="Inc\Texture.h" />
+    <ClInclude Include="Inc\TextureCache.h" />
+    <ClInclude Include="Inc\Transform.h" />
     <ClInclude Include="Inc\VertexShader.h" />
     <ClInclude Include="Inc\VertexTypes.h" />
     <ClInclude Include="Src\Precompiled.h" />
@@ -163,17 +173,21 @@
     <ClCompile Include="Src\GraphicsSystem.cpp" />
     <ClCompile Include="Src\MeshBuffer.cpp" />
     <ClCompile Include="Src\MeshBuilder.cpp" />
+    <ClCompile Include="Src\ModelCache.cpp" />
+    <ClCompile Include="Src\ModelIO.cpp" />
     <ClCompile Include="Src\PixelShader.cpp" />
+    <ClCompile Include="Src\PostProcessingEffect.cpp" />
     <ClCompile Include="Src\Precompiled.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Src\RenderObject.cpp" />
     <ClCompile Include="Src\RenderTarget.cpp" />
     <ClCompile Include="Src\Sampler.cpp" />
     <ClCompile Include="Src\SimpleDraw.cpp" />
+    <ClCompile Include="Src\StandardEffect.cpp" />
     <ClCompile Include="Src\Texture.cpp" />
+    <ClCompile Include="Src\TextureCache.cpp" />
     <ClCompile Include="Src\VertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -184,10 +198,10 @@
       <Project>{52d656a2-a2f4-4c54-a3c7-653427bed1e8}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Core\Core.vcxproj">
-      <Project>{10e94363-85b4-4c8e-ae1b-55f0fff5320f}</Project>
+      <Project>{e6c1874f-7010-4426-a3dc-b90e92023d73}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Math\Math.vcxproj">
-      <Project>{85be583f-fa37-4a76-aa86-143209ba1936}</Project>
+      <Project>{d1ca39ee-e8d8-4137-ada1-9e35f5d47ac2}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

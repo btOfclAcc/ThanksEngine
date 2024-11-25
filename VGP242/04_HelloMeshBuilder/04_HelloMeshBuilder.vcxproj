@@ -33,7 +33,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d7b41228-8e0d-426c-97ea-693e6f2907c6}</ProjectGuid>
+    <ProjectGuid>{D92DB9AE-1C38-4F21-9549-E1E2AD38B0A2}</ProjectGuid>
     <RootNamespace>My04HelloMeshBuilder</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

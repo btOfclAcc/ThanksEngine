@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6078d876-a31c-45c7-be57-cc4b0271b67e}</ProjectGuid>
+    <ProjectGuid>{E59DD9E5-12DA-4BBF-9CF1-2760AE320C82}</ProjectGuid>
     <RootNamespace>My05HelloDebug</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

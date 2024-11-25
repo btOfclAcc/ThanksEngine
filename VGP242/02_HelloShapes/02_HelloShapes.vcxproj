@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{a4460fcf-084e-4cee-8e22-b55a6226f33f}</ProjectGuid>
+    <ProjectGuid>{ABB52560-31CD-4BEE-B654-2296DB228AF7}</ProjectGuid>
     <RootNamespace>My02HelloShapes</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

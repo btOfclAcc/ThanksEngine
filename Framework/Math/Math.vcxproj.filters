@@ -2,26 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Inc">
-      <UniqueIdentifier>{1eebd76f-ed99-4410-b362-88398f69d175}</UniqueIdentifier>
+      <UniqueIdentifier>{d0428730-80ad-4b88-9668-1dce6417d400}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src">
-      <UniqueIdentifier>{2a38a009-d490-4641-beb8-60f258fc3267}</UniqueIdentifier>
+      <UniqueIdentifier>{0b92f594-36b1-4c8e-afb0-70e064e4b61a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Inc\Common.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\Constants.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\Matrix4.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\Quaternion.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\ThanksMath.h">
       <Filter>Inc</Filter>
     </ClInclude>
     <ClInclude Include="Inc\Vector2.h">
@@ -33,16 +21,24 @@
     <ClInclude Include="Inc\Vector4.h">
       <Filter>Inc</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Common.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Constants.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Matrix4.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
     <ClInclude Include="Src\Precompiled.h">
       <Filter>Src</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\ThanksMath.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\ThanksMath.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
+    <ClCompile Include="Src\ThanksMath.cpp" />
   </ItemGroup>
 </Project>
