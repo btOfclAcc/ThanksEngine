@@ -5,7 +5,7 @@
 using namespace ThanksEngine;
 using namespace ThanksEngine::Graphics;
 
-void PixelShader::Initialize(const std::filesystem::path& filePath)
+void PixelShader::Initialize(const std::filesystem::path& filePath, const char* entryPoint)
 {
 	auto device = GraphicsSystem::Get()->GetDevice();
 	DWORD shaderFlags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_DEBUG;
@@ -15,8 +15,8 @@ void PixelShader::Initialize(const std::filesystem::path& filePath)
 	HRESULT hr = D3DCompileFromFile(
 		filePath.c_str(),
 		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		"PS", "ps_5_0",
+		D3D_COMPILE_STANDARD_FILE_INCLUDE, 
+		entryPoint, "ps_5_0",
 		shaderFlags, 0,
 		&shaderBlob,
 		&errorBlob);

@@ -33,5 +33,8 @@ namespace ThanksEngine::Graphics
 
 		// Screen Quad
 		static MeshPX CreateScreenQuad();
+		
+		// Sprite Quad
+		static MeshPX CreateSpriteQuad(float width, float height);
 	};
 }

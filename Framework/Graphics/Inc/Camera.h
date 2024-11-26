@@ -8,7 +8,7 @@ namespace ThanksEngine::Graphics
 		enum class ProjectionMode
 		{
 			Perspective,
-			Orphographic
+			Orthographic
 		};
 
 		void SetMode(ProjectionMode mode);
