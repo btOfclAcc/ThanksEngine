@@ -3,9 +3,12 @@
 #include "VertexTypes.h"
 #include "Camera.h"
 #include "RenderObject.h"
+#include "AnimationUtil.h"
 
 using namespace ThanksEngine;
 using namespace ThanksEngine::Graphics;
+
+static constexpr size_t MaxBoneCount = 256;
 
 void StandardEffect::Initialize(const std::filesystem::path& path)
 {
@@ -17,10 +20,12 @@ void StandardEffect::Initialize(const std::filesystem::path& path)
 	mLightBuffer.Initialize();
 	mMaterialBuffer.Initialize();
 	mSettingsBuffer.Initialize();
+	mBoneTransformBuffer.Initialize(MaxBoneCount * sizeof(Math::Matrix4));
 }
 
 void StandardEffect::Terminate()
 {
+	mBoneTransformBuffer.Terminate();
 	mSettingsBuffer.Terminate();
 	mMaterialBuffer.Terminate();
 	mLightBuffer.Terminate();
@@ -46,6 +51,8 @@ void StandardEffect::Begin()
 
 	mSettingsBuffer.BindPS(3);
 	mSettingsBuffer.BindVS(3);
+
+	mBoneTransformBuffer.BindVS(4);
 }
 
 void StandardEffect::End()
@@ -67,6 +74,7 @@ void StandardEffect::Render(const RenderObject& renderObject)
 	settingsData.bumpWeight = mSettingsData.bumpWeight;
 	settingsData.useShadowMap = mSettingsData.useShadowMap > 0 && mShadowMap != nullptr;
 	settingsData.depthBias = mSettingsData.depthBias;
+	settingsData.useSkinning = 0;
 
 	const Math::Matrix4 matWorld = renderObject.transform.GetMatrix4();
 	const Math::Matrix4 matView = mCamera->GetViewMatrix();
@@ -114,6 +122,7 @@ void StandardEffect::Render(const RenderGroup& renderGroup)
 	settingsData.useShadowMap = mSettingsData.useShadowMap > 0 && mShadowMap != nullptr;
 	settingsData.depthBias = mSettingsData.depthBias;
 	settingsData.bumpWeight = mSettingsData.bumpWeight;
+	settingsData.useSkinning = mSettingsData.useSkinning > 0 && renderGroup.skeleton != nullptr;
 
 	TransformData transformData;
 	transformData.wvp = Transpose(matFinal);
@@ -126,6 +135,22 @@ void StandardEffect::Render(const RenderGroup& renderGroup)
 		const Math::Matrix4 matLightProjection = mLightCamera->GetProjectionMatrix();
 		transformData.lwvp = Transpose(matWorld * matLightView * matLightProjection);
 		mShadowMap->BindPS(4);
+	}
+
+	if (settingsData.useSkinning)
+	{
+		AnimationUtil::BoneTransforms boneTransforms;
+		AnimationUtil::ComputeBoneTransforms(renderGroup.modelId, boneTransforms, renderGroup.animator);
+		AnimationUtil::ApplyBoneOffset(renderGroup.modelId, boneTransforms);
+
+		// our engine is left handed
+		// directX is right handed
+		for (auto& transform : boneTransforms)
+		{
+			transform = Transpose(transform);
+		}
+		boneTransforms.resize(MaxBoneCount);
+		mBoneTransformBuffer.Update(boneTransforms.data());
 	}
 
 	mTransformBuffer.Update(transformData);
@@ -209,5 +234,11 @@ void StandardEffect::DebugUI()
 			mSettingsData.useShadowMap = useShadowMap ? 1 : 0;
 		}
 		ImGui::DragFloat("DepthBias", &mSettingsData.depthBias, 0.000001f, 0.0f, 1.0f, "%.6f");
+	
+		bool useSkinning = mSettingsData.useSkinning > 0;
+		if (ImGui::Checkbox("UseSkinningMap", &useSkinning))
+		{
+			mSettingsData.useSkinning = useSkinning ? 1 : 0;
+		}
 	}
 }
