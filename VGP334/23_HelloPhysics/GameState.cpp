@@ -95,8 +95,6 @@ void GameState::UpdateCamera(float deltaTime)
 	}
 }
 
-bool checkBox = true;
-
 void GameState::Render()
 {
 	mStandardEffect.Begin();
