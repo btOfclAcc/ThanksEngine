@@ -19,22 +19,18 @@ protected:
 	ThanksEngine::Graphics::DirectionalLight mDirectionalLight;
 	ThanksEngine::Graphics::StandardEffect mStandardEffect;
 
-	// ball data
+	// ball info
 	ThanksEngine::Graphics::RenderObject mBall;
 	ThanksEngine::Physics::CollisionShape mBallShape;
 	ThanksEngine::Physics::RigidBody mBallRB;
 
-	// groumd data
+	// ground info
 	ThanksEngine::Graphics::RenderObject mGround;
 	ThanksEngine::Physics::CollisionShape mGroundShape;
 	ThanksEngine::Physics::RigidBody mGroundRB;
 
-	struct BoxData
-	{
-		ThanksEngine::Graphics::RenderObject box;
-		ThanksEngine::Physics::CollisionShape boxShape;
-		ThanksEngine::Physics::RigidBody boxRB;
-	};
-	using Boxes = std::vector<BoxData>;
-	Boxes mBoxes;
+	// cloth info
+	ThanksEngine::Graphics::RenderObject mCloth;
+	ThanksEngine::Graphics::Mesh mClothMesh;
+	ThanksEngine::Physics::SoftBody mClothSoftBody;
 };

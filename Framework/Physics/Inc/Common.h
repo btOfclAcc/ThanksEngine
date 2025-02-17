@@ -14,6 +14,8 @@
 #include <Bullet/BulletSoftBody/btSoftBodyRigidBodyCollisionConfiguration.h>
 #include <Bullet/BulletSoftBody/btSoftBodySolvers.h>
 
+#define USE_SOFT_BODY
+
 // helper function
 template<class T>
 inline void SafeDelete(T*& ptr)
@@ -54,7 +56,7 @@ inline ThanksEngine::Math::Quaternion ToQuaternion(const btQuaternion& q)
 	};
 }
 
-inline ThanksEngine::Color TOColor(const btVector3& c)
+inline ThanksEngine::Color ToColor(const btVector3& c)
 {
 	return {
 		static_cast<float>(c.getX()),
