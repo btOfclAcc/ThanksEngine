@@ -1,12 +1,14 @@
 #include "Precompiled.h"
 #include "App.h"
 #include "AppState.h"
+#include "EventManager.h"
 
 using namespace ThanksEngine;
 using namespace ThanksEngine::Core;
 using namespace ThanksEngine::Graphics;
 using namespace ThanksEngine::Input;
 using namespace ThanksEngine::Physics;
+using namespace ThanksEngine::Audio;
 
 void App::Run(const AppConfig& config)
 {
@@ -27,6 +29,9 @@ void App::Run(const AppConfig& config)
 	SimpleDraw::StaticInitialize(config.maxDrawLines);
 	TextureCache::StaticInitialize("../../Assets/Images/");
 	ModelCache::StaticInitialize();
+	EventManager::StaticInitialize();
+	AudioSystem::StaticInitialize();
+	SoundEffectManager::StaticInitialize("../../Assets/Sounds/");
 
 	PhysicsWorld::Settings settings;
 	PhysicsWorld::StaticInitialize(settings);
@@ -50,6 +55,8 @@ void App::Run(const AppConfig& config)
 			Quit();
 			break;
 		}
+
+		AudioSystem::Get()->Update();
 
 		if (mNextState != nullptr)
 		{
@@ -79,6 +86,9 @@ void App::Run(const AppConfig& config)
 
 	// terminate singletons
 	PhysicsWorld::StaticTerminate();
+	SoundEffectManager::StaticTerminate();
+	AudioSystem::StaticTerminate();
+	EventManager::StaticTerminate();
 	ModelCache::StaticTerminate();
 	TextureCache::StaticTerminate();
 	SimpleDraw::StaticTerminate();
