@@ -23,7 +23,7 @@ void GameState::Initialize()
 	mStandardEffect.SetCamera(mCamera);
 	mStandardEffect.SetDirectionalLight(mDirectionalLight);
 
-	mCharacter.Initialize(L"../../Assets/Models/Ortiz/Ch43_nonPBR.model");
+	mCharacter.Initialize(L"../../Assets/Models/Ortiz/Ch43_nonPBR.model", &mCharacterAnimator);
 
 	ModelCache::Get()->AddAnimation(mCharacter.modelId, L"../../Assets/Models/Ortiz/Reaction.model");
 	ModelCache::Get()->AddAnimation(mCharacter.modelId, L"../../Assets/Models/Ortiz/Defeated.model");
@@ -95,7 +95,7 @@ void GameState::Render()
 		if (mShowSkeleton)
 		{
 			AnimationUtil::BoneTransforms boneTransforms;
-			AnimationUtil::ComputeBoneTransforms(mCharacter.modelId, boneTransforms);
+			AnimationUtil::ComputeBoneTransforms(mCharacter.modelId, boneTransforms, &mCharacterAnimator);
 			AnimationUtil::DrawSkeleton(mCharacter.modelId, boneTransforms);
 		}
 		else

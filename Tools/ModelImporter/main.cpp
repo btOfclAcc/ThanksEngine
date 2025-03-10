@@ -87,7 +87,7 @@ std::optional<Arguments> ParserArgs(int argc, char* argv[])
 		}
 		else if (strcmp(argv[i], "-animOnly") == 0)
 		{
-			args.animOnly = argv[i + 1] == "1";
+			args.animOnly = atoi(argv[i + 1]) == 1;
 			++i;
 		}
 	}

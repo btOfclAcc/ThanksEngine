@@ -1,3 +1,10 @@
 -scale 0.01 ../../Assets/Models/Ortiz/Ch43_nonPBR.fbx ../../Assets/Models/Ortiz/Ch43_nonPBR.model
+
+-scale 0.01 -animOnly 1 ../../Assets/Models/Ortiz/Defeated.fbx ../../Assets/Models/Ortiz/Defeated.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Ortiz/JumpPushUp.fbx ../../Assets/Models/Ortiz/JumpPushUp.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Ortiz/Praying.fbx ../../Assets/Models/Ortiz/Praying.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Ortiz/Reaction.fbx ../../Assets/Models/Ortiz/Reaction.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Ortiz/TwistDance.fbx ../../Assets/Models/Ortiz/TwistDance.model
+
 -scale 0.01 ../../Assets/Models/Akai/akai_e_espiritu.fbx ../../Assets/Models/Akai/akai_e_espiritu.model
 -scale 0.01 ../../Assets/Models/Vanguard/VanguardByT.Choonyung.fbx ../../Assets/Models/Vanguard/VanguardByT.Choonyung.model
