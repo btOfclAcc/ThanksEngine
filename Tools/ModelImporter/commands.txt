@@ -8,3 +8,51 @@
 
 -scale 0.01 ../../Assets/Models/Akai/akai_e_espiritu.fbx ../../Assets/Models/Akai/akai_e_espiritu.model
 -scale 0.01 ../../Assets/Models/Vanguard/VanguardByT.Choonyung.fbx ../../Assets/Models/Vanguard/VanguardByT.Choonyung.model
+
+-scale 0.01 ../../Assets/Models/Maria/Maria.fbx ../../Assets/Models/Maria/Maria.model
+-scale 0.01 ../../Assets/Models/Maria/MariaWeapon.fbx ../../Assets/Models/Maria/MariaWeapon.model
+
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/SheathSword2_NoWeapon.fbx ../../Assets/Models/Maria/SheathSword2_NoWeapon.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/DrawSword1_NoWeapon.fbx ../../Assets/Models/Maria/DrawSword1_NoWeapon.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/SitUp.fbx ../../Assets/Models/Maria/SitUp.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/Laying.fbx ../../Assets/Models/Maria/Laying.model
+
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/SheathSword1.fbx ../../Assets/Models/Maria/SheathSword1.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/DrawSword2.fbx ../../Assets/Models/Maria/DrawSword2.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/Slash.fbx ../../Assets/Models/Maria/Slash.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/UnarmedKick.fbx ../../Assets/Models/Maria/UnarmedKick.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/SpellCast.fbx ../../Assets/Models/Maria/SpellCast.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/Blocking_Impact.fbx ../../Assets/Models/Maria/Blocking_Impact.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/Blocking_Entry.fbx ../../Assets/Models/Maria/Blocking_Entry.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/Blocking_Loop.fbx ../../Assets/Models/Maria/Blocking_Loop.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/Blocking_Exit.fbx ../../Assets/Models/Maria/Blocking_Exit.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Maria/Impact.fbx ../../Assets/Models/Maria/Impact.model
+
+
+-scale 0.11 ../../Assets/Models/Medea/Medea.fbx ../../Assets/Models/Medea/Medea.model
+
+-scale 0.11 -animOnly 1 ../../Assets/Models/Medea/Dancing.fbx ../../Assets/Models/Medea/Dancing.model
+-scale 0.11 -animOnly 1 ../../Assets/Models/Medea/DodgeBackward.fbx ../../Assets/Models/Medea/DodgeBackward.model
+-scale 0.11 -animOnly 1 ../../Assets/Models/Medea/LeftTurn.fbx ../../Assets/Models/Medea/LeftTurn.model
+-scale 0.11 -animOnly 1 ../../Assets/Models/Medea/Idle.fbx ../../Assets/Models/Medea/Idle.model
+
+
+-scale 0.028 ../../Assets/Models/Pirate/Pirate.fbx ../../Assets/Models/Pirate/Pirate.model
+
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/Climb.fbx ../../Assets/Models/Pirate/Climb.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/Idle.fbx ../../Assets/Models/Pirate/Idle.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/HangingIdle.fbx ../../Assets/Models/Pirate/HangingIdle.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/RightHook.fbx ../../Assets/Models/Pirate/RightHook.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/Fall.fbx ../../Assets/Models/Pirate/Fall.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/SpellCasting.fbx ../../Assets/Models/Pirate/SpellCasting.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/Forward.fbx ../../Assets/Models/Pirate/Forward.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/Dodge.fbx ../../Assets/Models/Pirate/Dodge.model
+-scale 0.028 -animOnly 1 ../../Assets/Models/Pirate/ShortDodge.fbx ../../Assets/Models/Pirate/ShortDodge.model
+
+
+-scale 0.01 ../../Assets/Models/Arissa/Arissa.fbx ../../Assets/Models/Arissa/Arissa.model
+
+-scale 0.01 -animOnly 1 ../../Assets/Models/Arissa/Dance.fbx ../../Assets/Models/Arissa/Dance.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Arissa/FightIdle.fbx ../../Assets/Models/Arissa/FightIdle.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Arissa/Idle.fbx ../../Assets/Models/Arissa/Idle.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Arissa/DodgeBackward.fbx ../../Assets/Models/Arissa/DodgeBackward.model
