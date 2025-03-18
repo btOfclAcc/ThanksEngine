@@ -584,6 +584,11 @@ void GameState::ExitCombatEvent()
 
 void GameState::Render()
 {
+    mStandardEffect.Begin();
+        mStandardEffect.Render(mGround);
+        mStandardEffect.Render(mDisco);
+    mStandardEffect.End();
+
     mParticleSystemEffect.Begin();
         mParticleSystem.Render(mParticleSystemEffect);
     mParticleSystemEffect.End();
