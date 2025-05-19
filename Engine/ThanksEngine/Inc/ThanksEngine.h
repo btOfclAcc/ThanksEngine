@@ -12,7 +12,10 @@
 #include "CameraComponent.h"
 #include "FPSCameraComponent.h"
 #include "MeshComponent.h"
+#include "ModelComponent.h"
 #include "RenderObjectComponent.h"
+#include "SoundBankComponent.h"
+#include "SoundEffectComponent.h"
 #include "TransformComponent.h"
 
 // Game Object

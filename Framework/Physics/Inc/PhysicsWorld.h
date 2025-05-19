@@ -32,6 +32,8 @@ namespace ThanksEngine::Physics
 		void Register(PhysicsObject* physicsObject);
 		void Unregister(PhysicsObject* physicsObject);
 
+		const Settings& GetSettings() const;
+		void UpdateSettings(const Settings& settings);
 		void SetGravity(const ThanksEngine::Math::Vector3& gravity);
 
 	private:

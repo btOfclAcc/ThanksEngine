@@ -9,6 +9,11 @@ namespace ThanksEngine
         Camera,			// contains the camera for viewing
         FPSCamera,		// move the camera with fps controls
         Mesh,			// adds a mesh shape to the game object
+        Model,			// adds a model to the game object
+        Animator,		// adds an animation controller to the game object
+        RigidBody,		// adds a physics body shape to the game object
+        SoundEffect,	// adds a sound effect to the object
+        SoundBank,		// adds a group of sound effects to an object
         Count			// last value, chain ids in custom components
     };
 
@@ -17,6 +22,7 @@ namespace ThanksEngine
         Invalid,		// default value, not valid
         Camera,			// manages the cameras in the world
         Render,			// renders renderobjects to the world
+        Physics,		// manages the physics systems in the world
         Count			// last value, chain ids in custom services
     };
 }

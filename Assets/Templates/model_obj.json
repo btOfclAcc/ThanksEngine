@@ -1,0 +1,47 @@
+{
+  "Components": {
+    "TransformComponent": {
+      "Position": [ 0.0, 10.0, 0.0 ],
+      "Rotation": [ 0.0, 0.0, 0.0, 1.0 ],
+      "Scale": [ 1.0, 1.0, 1.0 ]
+    },
+    "ModelComponent": {
+      "FileName": "../../Assets/Models/Maria/MariaWeapon.model",
+      "Animations": [
+        "../../Assets/Models/Maria/DrawSword2.model",
+        "../../Assets/Models/Maria/Slash.model",
+        "../../Assets/Models/Maria/Impact.model",
+        "../../Assets/Models/Maria/Blocking_Entry.model",
+        "../../Assets/Models/Maria/Blocking_Loop.model",
+        "../../Assets/Models/Maria/Blocking_Impact.model",
+        "../../Assets/Models/Maria/Blocking_Loop.model",
+        "../../Assets/Models/Maria/Blocking_Impact.model",
+        "../../Assets/Models/Maria/Blocking_Loop.model",
+        "../../Assets/Models/Maria/Blocking_Exit.model",
+        "../../Assets/Models/Maria/SpellCast.model"
+      ]
+    },
+    "AnimatorComponent": {
+
+    },
+    "RigidBodyComponent": {
+      "Mass": 1.0,
+      "ColliderData": {
+        "Shape": "Hull",
+        "HalfExtents": [ 0.5, 1.0, 0.5 ],
+        "Origin": [ 0.0, 1.0, 0.0 ]
+      }
+    },
+    "SoundEffectComponent": {
+      "FileName": "../../Assets/Sounds/photongun1.wav",
+      "Looping": true
+    },
+    "CustomDebugDrawComponent": {
+      "Position": [ 0.0, 0.0, 0.0 ],
+      "Color": [ 0.8, 1.0, 0.0, 1.0 ],
+      "Slices": 30,
+      "Rings": 30,
+      "Radius": 1.0
+    }
+  }
+}
