@@ -12,6 +12,12 @@
     },
     "PhysicsService": {
 
+    },
+    "CustomDebugDrawService": {
+
+    },
+    "UIRenderService": {
+
     }
   },
   "GameObjects": {

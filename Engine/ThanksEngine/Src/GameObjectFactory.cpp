@@ -14,6 +14,7 @@
 #include "SoundBankComponent.h"
 #include "SoundEffectComponent.h"
 #include "TransformComponent.h"
+#include "UITextComponent.h"
 
 using namespace ThanksEngine;
 
@@ -61,6 +62,10 @@ namespace
 		{
 			newComponent = gameObject.AddComponent<TransformComponent>();
 		}
+        else if (componentName == "UITextComponent")
+        {
+            newComponent = gameObject.AddComponent<UITextComponent>();
+        }
         else
         {
             newComponent = TryMake(componentName, gameObject);
@@ -110,6 +115,10 @@ Component* GetComponent(const std::string& componentName, GameObject& gameObject
     {
         component = gameObject.GetComponent<TransformComponent>();
     }
+	else if (componentName == "UITextComponent")
+	{
+		component = gameObject.GetComponent<UITextComponent>();
+	}
     else
     {
         component = TryGet(componentName, gameObject);
