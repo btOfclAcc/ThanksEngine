@@ -5,11 +5,11 @@ using namespace ThanksEngine;
 using namespace ThanksEngine::Physics;
 using namespace ThanksEngine::Graphics;
 
-void Particle::Initialize()
+void Particle::Initialize(float particleMass)
 {
     mLifeTime = 0.0f;
     mCollisionShape.InitializeEmpty();
-    mRigidBody.Initialize(mTransform, mCollisionShape, 1.0f, false);
+    mRigidBody.Initialize(mTransform, mCollisionShape, particleMass, false);
 }
 
 void Particle::Terminate()

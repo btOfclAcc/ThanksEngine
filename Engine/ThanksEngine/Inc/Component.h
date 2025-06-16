@@ -23,6 +23,7 @@ namespace ThanksEngine
 
         virtual void Serialize(rapidjson::Document& doc, rapidjson::Value& value) {}
         virtual void Deserialize(const rapidjson::Value& value) {}
+        virtual void Serialize(rapidjson::Document& doc, rapidjson::Value& value, const rapidjson::Value& original) {}
 
         virtual uint32_t GetTypeId() const = 0;
 

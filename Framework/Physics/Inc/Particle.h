@@ -17,7 +17,7 @@ namespace ThanksEngine::Physics
     class Particle
     {
     public:
-        void Initialize();
+        void Initialize(float particleMass);
         void Terminate();
         void Activate(const ParticleInfo& info, const Math::Vector3& position, const Math::Vector3& velocity);
         void Update(float deltaTime);

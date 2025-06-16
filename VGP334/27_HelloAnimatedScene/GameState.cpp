@@ -544,37 +544,37 @@ void GameState::IncreamentAnimatorEvent(character c, bool l)
 
 void GameState::OnMoveEvent()
 {
-    SoundEffectManager::Get()->Play(mExplosionEventId);
+    SoundEffectManager::Get()->Play(mExplosionEventId, false);
 }
 
 void GameState::XBlastSoundEvent()
 {
-    SoundEffectManager::Get()->Play(mXBlastEventId);
+    SoundEffectManager::Get()->Play(mXBlastEventId, false);
 }
 
 void GameState::BlackOutEvent()
 {
-	SoundEffectManager::Get()->Play(mBlackOutEventId);
+	SoundEffectManager::Get()->Play(mBlackOutEventId, false);
 }
 
 void GameState::WhoDecideEvent()
 {
-	SoundEffectManager::Get()->Play(mWhoDecideEventId);
+	SoundEffectManager::Get()->Play(mWhoDecideEventId, false);
 }
 
 void GameState::RaveEvent()
 {
-	SoundEffectManager::Get()->Play(mRaveEventId);
+	SoundEffectManager::Get()->Play(mRaveEventId, false);
 }
 
 void GameState::ScratchEvent()
 {
-	SoundEffectManager::Get()->Play(mScratchEventId);
+	SoundEffectManager::Get()->Play(mScratchEventId, false);
 }
 
 void GameState::CombatEvent()
 {
-	SoundEffectManager::Get()->Play(mCombatEventId);
+	SoundEffectManager::Get()->Play(mCombatEventId, false);
 }
 
 void GameState::ExitCombatEvent()

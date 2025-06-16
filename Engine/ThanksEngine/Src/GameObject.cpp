@@ -1,5 +1,6 @@
 #include "Precompiled.h"
 #include "GameObject.h"
+#include "GameWorld.h"
 
 using namespace ThanksEngine;
 
@@ -15,10 +16,19 @@ void GameObject::Initialize()
 
     mUniqueId = ++gUniqueId;
     mInitialized = true;
+
+    for (GameObject* child : mChildren)
+    {
+        child->Initialize();
+    }
 }
 
 void GameObject::Terminate()
 {
+    for (GameObject* child : mChildren)
+    {
+        child->Terminate();
+    }
     for (auto& component : mComponents)
     {
         component->Terminate();
@@ -43,6 +53,14 @@ void GameObject::DebugUI()
         for (auto& component : mComponents)
         {
             component->DebugUI();
+        }
+
+        if (!mWorld->IsInEditMode())
+        {
+            if (ImGui::Button("Edit"))
+            {
+                mWorld->EditTemplate(mTemplatePath);
+            }
         }
     }
     ImGui::PopID();
@@ -76,4 +94,34 @@ const GameWorld& GameObject::GetWorld() const
 const GameObjectHandle& GameObject::GetHandle() const
 {
     return mHandle;
+}
+
+void GameObject::AddChild(GameObject* child)
+{
+    mChildren.push_back(child);
+}
+
+GameObject* GameObject::GetChild(uint32_t index)
+{
+    return mChildren[index];
+}
+
+const GameObject* GameObject::GetChild(uint32_t index) const
+{
+    return mChildren[index];
+}
+
+void GameObject::SetParent(GameObject* parent)
+{
+    mParent = parent;
+}
+
+GameObject* GameObject::GetParent()
+{
+    return mParent;
+}
+
+const GameObject* GameObject::GetParent() const
+{
+    return mParent;
 }

@@ -18,6 +18,8 @@
 #include "SoundEffectComponent.h"
 #include "TransformComponent.h"
 #include "UIComponent.h"
+#include "UIButtonComponent.h"
+#include "UISpriteComponent.h"
 
 // Game Object
 #include "GameObject.h"
@@ -29,6 +31,7 @@
 // Services
 #include "Service.h"
 #include "CameraService.h"
+#include "PhysicsService.h"
 #include "RenderService.h"
 #include "UIRenderService.h"
 

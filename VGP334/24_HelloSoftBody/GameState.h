@@ -33,4 +33,6 @@ protected:
 	ThanksEngine::Graphics::RenderObject mCloth;
 	ThanksEngine::Graphics::Mesh mClothMesh;
 	ThanksEngine::Physics::SoftBody mClothSoftBody;
+
+	ThanksEngine::GameWorld mGameWorld;
 };

@@ -17,11 +17,15 @@ namespace ThanksEngine
         void Update(float deltaTime);
         void Render();
         void DebugUI();
+        void SaveEditTemplate();
 
         GameObject* CreateGameObject(std::string name, const std::filesystem::path& templatePath = "");
         void DestroyGameObject(const GameObjectHandle& handle);
 
-        void LoadLevel(const std::filesystem::path& levelFile);
+        void LoadLevel(const std::filesystem::path& levelFile, bool isEditor = false);
+        bool IsInEditMode() const;
+        bool IsRequestEdit() const;
+        void EditTemplate(const std::filesystem::path& templatePath);
 
         template<class ServiceType>
         ServiceType* AddService()
@@ -55,6 +59,9 @@ namespace ThanksEngine
             return const_cast<ServiceType*>(thisConst->GetService<ServiceType>());
         }
 
+        // Boot leg ground game object storage
+        GameObject* mGroundGameObject = nullptr;
+
     private:
         bool IsValid(const GameObjectHandle& handle);
         void ProcessDestroyList();
@@ -74,6 +81,8 @@ namespace ThanksEngine
         Services mServices;
 
         std::filesystem::path mLevelFileName;
+        GameObject* mEditGameObject = nullptr;
         bool mInitialized = false;
+        bool mIsEditor = false;
     };
 }

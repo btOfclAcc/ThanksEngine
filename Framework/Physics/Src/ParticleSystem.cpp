@@ -13,6 +13,9 @@ void ParticleSystem::Initialize(const ParticleSystemInfo& info)
     mLifeTime = info.lifeTime;
 
     InitializeParticles(info.maxParticles);
+
+    mOriginalParticlePerEmitMax = mInfo.particlesPerEmit.max;
+    mOriginalParticlePerEmitMin = mInfo.particlesPerEmit.min;
 }
 
 void ParticleSystem::InitializeParticles(uint32_t count)
@@ -21,7 +24,7 @@ void ParticleSystem::InitializeParticles(uint32_t count)
     for (uint32_t i = 0; i < count; ++i)
     {
         mParticles[i] = std::make_unique<Particle>();
-        mParticles[i]->Initialize();
+        mParticles[i]->Initialize(mInfo.particleMass);
     }
 }
 
@@ -55,6 +58,11 @@ void ParticleSystem::Update(float deltaTime)
 
 bool ParticleSystem::IsActive()
 {
+	if (mActiveOverride)
+	{
+		return false;
+	}
+
     if (mLifeTime > 0.0f)
     {
         return true;
@@ -100,8 +108,33 @@ void ParticleSystem::SetPosition(const Math::Vector3& position)
     mInfo.spawnPosition = position;
 }
 
+void ParticleSystem::SetSpawnOverride(bool override)
+{
+    if (override)
+    {
+        mInfo.particlesPerEmit.max = 0.0f;
+        mInfo.particlesPerEmit.min = 0.0f;
+    }
+    else
+    {
+		mInfo.particlesPerEmit.max = mOriginalParticlePerEmitMax;
+		mInfo.particlesPerEmit.min = mOriginalParticlePerEmitMin;
+    }
+}
+
+void ParticleSystem::SetActiveOverride(bool override)
+{
+	mActiveOverride = override;
+}
+
 void ParticleSystem::SpawnParticles()
 {
+    //if (mSpawnOverride)
+    //{
+    //    mNextSpawnTime = mInfo.timeBetweenEmit.GetRandom();
+    //    return;
+    //}
+
     int numParticles = mInfo.particlesPerEmit.GetRandomInclusive();
     for (int i = 0; i < numParticles; ++i)
     {

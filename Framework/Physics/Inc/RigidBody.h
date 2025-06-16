@@ -17,6 +17,12 @@ namespace ThanksEngine::Physics
 
 		void SetPosition(const ThanksEngine::Math::Vector3& position);
 		void SetVelocity(const ThanksEngine::Math::Vector3& velocity);
+		void SetBounciness(const float bounciness);
+		void SetDynamicOverride(bool override);
+
+		void SetGravity(const ThanksEngine::Math::Vector3& acceleration);
+
+		bool CheckCollision(const RigidBody* other) const;
 
 		void Activate();
 		void Deactivate();
@@ -30,6 +36,7 @@ namespace ThanksEngine::Physics
 		btRigidBody* mRigidBody = nullptr;
 		btDefaultMotionState* mMotionState = nullptr;
 		float mMass = 0.0f;
+		bool mDynamicOverride = false;
 
 		ThanksEngine::Graphics::Transform* mGraphicsTransform = nullptr;
 	};

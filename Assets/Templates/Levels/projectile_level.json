@@ -1,0 +1,91 @@
+{
+  "Capacity": 100,
+  "Services": {
+    "CameraService": {
+
+    },
+    "RenderService": {
+      "Direction": [ 1.0, -1.0, 0.0 ],
+      "Ambient": [ 0.5, 0.5, 0.5, 1.0 ],
+      "Diffuse": [ 0.7, 0.7, 0.7, 1.0 ],
+      "Specular": [ 0.9, 0.9, 0.9, 1.0 ]
+    },
+    "PhysicsService": {
+
+    },
+    "CustomParticleService": {
+
+    },
+	"BulletPoolService": {
+
+	}
+  },
+  "GameObjects": {
+    "Camera": {
+      "Template": "../../Assets/Templates/fps_camera.json"
+    },
+    "Ground": {
+      "Template": "../../Assets/Templates/ground.json"
+    },
+	"Bullet1": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet2": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet3": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet4": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet5": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet6": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet7": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet8": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet9": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet10": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet11": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet12": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet13": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet14": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet15": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet16": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet17": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet18": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet19": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	},
+	"Bullet20": {
+	  "Template": "../../Assets/Templates/projectile.json"
+	}
+  }
+}

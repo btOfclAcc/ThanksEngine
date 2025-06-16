@@ -14,6 +14,8 @@
 #include "SoundBankComponent.h"
 #include "SoundEffectComponent.h"
 #include "TransformComponent.h"
+#include "UIButtonComponent.h"
+#include "UISpriteComponent.h"
 #include "UITextComponent.h"
 
 using namespace ThanksEngine;
@@ -61,6 +63,14 @@ namespace
 		else if (componentName == "TransformComponent")
 		{
 			newComponent = gameObject.AddComponent<TransformComponent>();
+		}
+		else if (componentName == "UIButtonComponent")
+		{
+			newComponent = gameObject.AddComponent<UIButtonComponent>();
+		}
+		else if (componentName == "UISpriteComponent")
+		{
+			newComponent = gameObject.AddComponent<UISpriteComponent>();
 		}
         else if (componentName == "UITextComponent")
         {
@@ -114,7 +124,15 @@ Component* GetComponent(const std::string& componentName, GameObject& gameObject
     else if (componentName == "TransformComponent")
     {
         component = gameObject.GetComponent<TransformComponent>();
-    }
+	}
+	else if (componentName == "UIButtonComponent")
+	{
+		component = gameObject.GetComponent<UIButtonComponent>();
+	}
+	else if (componentName == "UISpriteComponent")
+	{
+		component = gameObject.GetComponent<UISpriteComponent>();
+	}
 	else if (componentName == "UITextComponent")
 	{
 		component = gameObject.GetComponent<UITextComponent>();
@@ -162,6 +180,20 @@ void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObje
             newComponent->Deserialize(component.value);
         }
     }
+    if (doc.HasMember("Children"))
+    {
+        auto children = doc["Children"].GetObj();
+        for (auto& child : children)
+        {
+            std::string name = child.name.GetString();
+            std::filesystem::path childTemplate = child.value["Template"].GetString();
+            GameObject* childGO = gameWorld.CreateGameObject(name, childTemplate);
+
+            GameObjectFactory::OverrideDeserialize(child.value, *childGO);
+            gameObject.AddChild(childGO);
+            childGO->SetParent(&gameObject);
+        }
+    }
 }
 
 void GameObjectFactory::OverrideDeserialize(const rapidjson::Value& value, GameObject& gameObject)
@@ -177,5 +209,24 @@ void GameObjectFactory::OverrideDeserialize(const rapidjson::Value& value, GameO
                 ownedComponent->Deserialize(component.value);
             }
         }
+    }
+}
+
+void GameObjectFactory::SerializeGameObject(rapidjson::Document& doc, const rapidjson::Document& original, GameObject& gameObject)
+{
+    if (original.HasMember("Components"))
+    {
+        auto originalComponents = original["Components"].GetObj();
+        rapidjson::Value components(rapidjson::kObjectType);
+        for (auto& originalData : originalComponents)
+        {
+            Component* ownedComponent = GetComponent(originalData.name.GetString(), gameObject);
+            if (ownedComponent != nullptr)
+            {
+                ownedComponent->Serialize(doc, components, originalData.value);
+            }
+        }
+        doc.SetObject();
+        doc.AddMember("Components", components, doc.GetAllocator());
     }
 }

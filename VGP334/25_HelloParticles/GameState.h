@@ -17,5 +17,10 @@ protected:
 
 	ThanksEngine::Graphics::Camera mCamera;
 	ThanksEngine::Graphics::ParticleSystemEffect mParticleSystemEffect;
-	ThanksEngine::Physics::ParticleSystem mParticleSystem;
+	ThanksEngine::Physics::ParticleSystem mParticleSystem1;
+	ThanksEngine::Physics::ParticleSystem mParticleSystem2;
+
+	ThanksEngine::GameWorld mGameWorld;
+
+	bool mSpawnOverride = false;
 };

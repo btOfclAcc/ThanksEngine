@@ -47,6 +47,35 @@ void RigidBody::SetVelocity(const ThanksEngine::Math::Vector3& velocity)
 	mRigidBody->setLinearVelocity(TobtVector3(velocity));
 }
 
+void RigidBody::SetBounciness(const float bounciness)
+{
+	mRigidBody->setRestitution(bounciness);
+}
+
+void RigidBody::SetDynamicOverride(bool override)
+{
+	mDynamicOverride = override;
+}
+
+void RigidBody::SetGravity(const ThanksEngine::Math::Vector3& acceleration)
+{
+	mRigidBody->setGravity(TobtVector3(acceleration));
+}
+
+bool RigidBody::CheckCollision(const RigidBody* other) const
+{
+	ASSERT(other != nullptr, "RigidBody: other must not be null");
+
+	if (mRigidBody->checkCollideWith(other->mRigidBody))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void RigidBody::Activate()
 {
 	PhysicsWorld::Get()->Register(this);
@@ -60,6 +89,11 @@ void RigidBody::Deactivate()
 
 bool RigidBody::IsDynamic() const
 {
+	if (mDynamicOverride)
+	{
+		return false;
+	}
+
 	return mMass > 0.0f;
 }
 

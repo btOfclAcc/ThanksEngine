@@ -87,6 +87,15 @@ void RigidBodyComponent::Deserialize(const rapidjson::Value& value)
 			ASSERT(false, "RigidBodyComponent: requires shape data");
 		}
 	}
+	if (value.HasMember("Bounciness"))
+	{
+		mRigidBody.SetBounciness(value["Bounciness"].GetFloat());
+	}
+}
+
+Physics::RigidBody RigidBodyComponent::GetRigidBody() const
+{
+	return mRigidBody;
 }
 
 void RigidBodyComponent::SetPosition(const Math::Vector3& position)
@@ -97,4 +106,43 @@ void RigidBodyComponent::SetPosition(const Math::Vector3& position)
 void RigidBodyComponent::SetVelocity(const Math::Vector3& velocity)
 {
 	mRigidBody.SetVelocity(velocity);
+}
+
+void RigidBodyComponent::SetBounciness(const float bounciness)
+{
+	mRigidBody.SetBounciness(bounciness);
+}
+
+void RigidBodyComponent::SetDynamicOverride(bool override)
+{
+	mRigidBody.SetDynamicOverride(override);
+}
+
+void RigidBodyComponent::SetGravity(const Math::Vector3& acceleration)
+{
+	mRigidBody.SetGravity(acceleration);
+}
+
+void RigidBodyComponent::SetExchangeAcceleration(const Math::Vector3& acceleration)
+{
+	mExchangeAcceleration = acceleration;
+}
+
+void RigidBodyComponent::ToggleGravity()
+{
+	if (mExchangeAccelerationEnabled)
+	{
+		mRigidBody.SetGravity(mOriginalAcceleration);
+	}
+	else
+	{
+		mRigidBody.SetGravity(mExchangeAcceleration);
+	}
+	mExchangeAccelerationEnabled = !mExchangeAccelerationEnabled;
+}
+
+bool RigidBodyComponent::CheckCollision(const RigidBodyComponent* other) const
+{
+	ASSERT(other != nullptr, "RigidBodyComponent: other must not be null");
+	return mRigidBody.CheckCollision(&other->mRigidBody);
 }

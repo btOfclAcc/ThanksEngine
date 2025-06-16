@@ -6,7 +6,9 @@ namespace ThanksEngine
     {
         None,
         SpacePressed,
-        FKeyPressed
+        FKeyPressed,
+		Mouse1Pressed,
+		Count
     };
 
     class Event
@@ -33,4 +35,10 @@ namespace ThanksEngine
     public:
         FKeyPressedEvent() : Event(EventType::FKeyPressed) {}
     };
+
+	class Mouse1PressedEvent : public Event
+	{
+	public:
+		Mouse1PressedEvent() : Event(EventType::Mouse1Pressed) {}
+	};
 }
